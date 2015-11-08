@@ -1,0 +1,20 @@
+module.exports = {
+	angular:{
+    src:[
+      'app/angular/scripts/app.src.js'
+    ],
+    dest:'app/angular/scripts/app.min.js'
+  },
+  apps:{
+    src:[
+      'app/angular/scripts/apps.src.js'
+    ],
+    dest:'app/angular/scripts/apps.min.js'
+  },
+  html:{
+    src:[
+      'app/html/scripts/app.src.js'
+    ],
+    dest:'app/html/scripts/app.min.js'
+  }
+}

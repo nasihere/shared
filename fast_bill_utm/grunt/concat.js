@@ -1,0 +1,40 @@
+module.exports = {
+	css:{
+    src:[
+      'Assests/css/bootstrap.min.css',
+      'Assests/font-awesome/css/font-awesome.css',
+
+      'Assests/js/plugins/gritter/jquery.gritter.css',
+      'Assests/css/plugins/toastr/toastr.min.css',
+      'Assests/css/animate.css',
+      'Assests/css/style.css',
+      'Assests/css/plugins/datapicker/datepicker3.css',
+      'Assests/css/jqueryui.css',
+      'Assests/css/plugins/iCheck/custom.css'
+    ],
+    dest:'dist/app.main.css'
+  },  
+  customcss:{
+    src:[
+      'Assests/css/your_style.css'
+    ],
+    dest:'dist/your_style.css'
+  },
+  js:{
+    src:[
+      'Assests/js/jquery-2.1.1.js',
+      'Assests/js/bootstrap.min.js',
+      'Assests/js/plugins/metisMenu/jquery.metisMenu.js',
+      'Assests/js/plugins/iCheck/icheck.min.js',
+      'Assests/js/boot.js',
+      'Assests/js/plugins/toastr/toastr.min.js',
+      'Assests/js/plugins/datapicker/bootstrap-datepicker.js',
+      'Assests/js/plugins/gritter/jquery.gritter.min.js',
+      'node_modules/angular/angular.min.js',
+      'app.js',
+      'Scripts/**/*.js',
+      'Components/**/*.js',
+    ],
+    dest:'dist/app.src.js'
+  }
+}

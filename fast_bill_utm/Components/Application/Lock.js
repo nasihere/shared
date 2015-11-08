@@ -11,7 +11,7 @@ function printContent(el){
 	document.body.innerHTML = restorepage;
 }
 var ChangeEvent = false;
-app.controller("BaseController", ['$scope','API','$http','$compile','$timeout', function ($scope,API,$http,$compile,$timeout) {
+app.controller("LockController", ['$scope','API','$http','$compile','$timeout', function ($scope,API,$http,$compile,$timeout) {
 	HttpUrl = "Qry/billq.php";
     
 	$scope.UserName = "Bhupen";

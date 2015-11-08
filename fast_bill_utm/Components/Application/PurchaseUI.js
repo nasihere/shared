@@ -13,7 +13,7 @@ Size_val: "",
 Tax_val: "",
 UOM: ""
 };
-app.controller("BaseController", ['$scope','API','$http','$compile', function ($scope,API,$http,$compile,$filter) {
+app.controller("PurchaseController", ['$scope','API','$http','$compile', function ($scope,API,$http,$compile,$filter) {
     $scope.City = params['city'];
     $scope.Category =  params['category'];
     $scope.Mobile = params['mobile'];

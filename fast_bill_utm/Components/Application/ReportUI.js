@@ -11,7 +11,7 @@ function printContent(el){
 	document.body.innerHTML = restorepage;
 }
 var ChangeEvent = false;
-app.controller("BaseController", ['$scope','API','$http','$compile','$location','$filter', function ($scope,API,$http,$compile,$location,$filter) {
+app.controller("ReportController", ['$scope','API','$http','$compile','$location','$filter', function ($scope,API,$http,$compile,$location,$filter) {
 	HttpUrl = "Qry/report.php";
     
 	$scope.isDeveloperMode = false;

@@ -15,7 +15,7 @@ function printContent(el){
 
 var ChangeEvent = false;
 
-app.controller("BaseController", ['$scope','API','$http','$compile','$location','$anchorScroll', function ($scope,API,$http,$compile,$location,$anchorScroll) {
+app.controller("BillController", ['$scope','API','$http','$compile','$location','$anchorScroll', function ($scope,API,$http,$compile,$location,$anchorScroll) {
 	HttpUrl = "Qry/billq.php";
     
 	$scope.isDeveloperMode = false;
