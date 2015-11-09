@@ -32,10 +32,10 @@ module.exports = {
       'Assests/js/plugins/gritter/jquery.gritter.min.js',
       'node_modules/angular/angular.min.js',
       'node_modules/angular-new-router/dist/router.es5.min.js',
-      'index.js',
-      'app.js',
-      'Scripts/**/*.js',
-      'Components/**/*.js',
+      'components/**/*.js',
+      'index.js'
+      //'app.js',
+      //'Scripts/**/*.js',
     ],
     dest:'dist/app.src.js'
   }
