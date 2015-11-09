@@ -13,14 +13,13 @@
 
 </head>
 
-    <body ng-app="app" data-ng-controller="BaseController" >
+    <body ng-app="app" data-ng-controller="AppController as app" >
 
          <div id="wrapper">
         <div ng-include src="'Shared/SideBar/SideBar.html'"></div>
         <div id="page-wrapper" class="gray-bg dashbard-1 ">
             <div ng-include src="'Shared/NavigationBar/NavigationBar.html'"></div>
-            <div ng-include src="'Shared/FastBill/PurchaseUI.html'"></div>
-
+            <div ng-viewport></div>
             <div ng-include src="'Shared/FooterBar/FooterBar.html'"></div>
             
             

@@ -2621,17 +2621,42 @@ SHORTDAY:"Sun Mon Tue Wed Thu Fri Sat".split(" "),SHORTMONTH:"Jan Feb Mar Apr Ma
 maxFrac:2,minFrac:2,minInt:1,negPre:"-\u00a4",negSuf:"",posPre:"\u00a4",posSuf:""}]},id:"en-us",pluralCat:function(a,e){var f=a|0,h=e;w===h&&(h=Math.min(c(a),3));Math.pow(10,h);return 1==f&&0==h?"one":"other"}})}]),B(X).ready(function(){Zd(X,zc)}))})(window,document);!window.angular.$$csp().noInlineStyle&&window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 //# sourceMappingURL=angular.min.js.map
 
+"use strict";function controllerProviderDecorator(t,e){var r=t.register;t.register=function(t,n){return e.register(t,n),r.apply(this,arguments)}}function $controllerIntrospectorProvider(){var t=[],e=null;return{register:function(r,n){angular.isArray(n)&&(n=n[n.length-1]),n.$routeConfig&&(e?e(r,n.$routeConfig):t.push({name:r,config:n.$routeConfig}))},$get:["$componentLoader",function(r){return function(n){for(e=function(t,e){return t=r.component(t),n(t,e)};t.length>0;){var o=t.pop();e(o.name,o.config)}}}]}}function routerFactory(t,e,r,n,o){o(function(t,e){n.config(t,e)}),e.$watch(function(){return r.path()},function(e){t.navigate(e)});var i=t.navigate;return t.navigate=function(t){return i.call(this,t).then(function(t){t&&r.path(t)})},t}function ngViewportDirective(t,e,r,n){function o(t,r,n){return e.invoke(t,r,n.locals)}function i(e,n,i,u,s){function p(){g&&(t.cancel(g),g=null),l&&(l.$destroy(),l=null),v&&(g=t.leave(v),g.then(function(){g=null}),v=null)}var l,f,h,v,g,d,m=i.ngViewport||"default",y=u[0],w=u[1],$=y&&y.$$router||c;$.registerViewport({canDeactivate:function(t){return h&&h.canDeactivate?o(h.canDeactivate,h,t):!0},activate:function(i){var c=a(i);if(c!==d){i.locals.$scope=f=e.$new(),w.$$router=i.router,w.$$template=i.template;var u=i.component,g=s(f,function(e){t.enter(e,null,v||n),p()}),m=i.controller;f[u]=m;var y;if(h&&h.deactivate&&(y=r.when(o(h.deactivate,h,i))),h=m,v=g,l=f,d=c,m.activate){var $=r.when(o(m.activate,m,i));return y?y.then($):$}return y}}},m)}function a(t){return JSON.stringify({path:t.path,component:t.component,params:Object.keys(t.params).reduce(function(e,r){return"childRoute"!==r&&(e[r]=t.params[r]),e},{})})}var c=n;return{restrict:"AE",transclude:"element",terminal:!0,priority:400,require:["?^^ngViewport","ngViewport"],link:i,controller:function(){},controllerAs:"$$ngViewport"}}function ngViewportFillContentDirective(t){return{restrict:"EA",priority:-400,require:"ngViewport",link:function(e,r,n,o){var i=o.$$template;r.html(i);var a=t(r.contents());a(e)}}}function makeComponentString(t){return['<router-component component-name="',t,'">',"</router-component>"].join("")}function ngLinkDirective(t,e,r){function n(t,e,n,i){var a=i&&i.$$router||o;if(a){var c,u=n.ngLink||"",s=u.match(LINK_MICROSYNTAX_RE),p=s[1],l=s[2];if(l){var f=r(l);if(f.constant){var h=f();c="."+a.generate(p,h),e.attr("href",c)}else t.$watch(function(){return f(t)},function(t){c="."+a.generate(p,t),e.attr("href",c)},!0)}else c="."+a.generate(p),e.attr("href",c)}}var o=t;return{require:"?^^ngViewport",restrict:"A",link:n}}function anchorLinkDirective(t){return{restrict:"E",link:function(e,r){if("a"===r[0].nodeName.toLowerCase()){var n="[object SVGAnimatedString]"===Object.prototype.toString.call(r.prop("href"))?"xlink:href":"href";r.on("click",function(e){var o=r.attr(n);o||e.preventDefault(),t.recognize(o)&&(t.navigate(o),e.preventDefault())})}}}}function setupRoutersStepFactory(){return function(t){return t.router.makeDescendantRouters(t)}}function initLocalsStepFactory(){return function(t){return t.router.traverseInstruction(t,function(t){return t.locals={$router:t.router,$routeParams:t.params||{}}})}}function initControllersStepFactory(t,e){return function(r){return r.router.traverseInstruction(r,function(r){var n,o=e.controllerName(r.component),i=r.locals;try{n=t(o,i)}catch(a){console.warn&&console.warn("Could not instantiate controller",o),n=t(angular.noop,i)}return r.controller=n})}}function runCanDeactivateHookStepFactory(){return function(t){return t.router.canDeactivatePorts(t)}}function runCanActivateHookStepFactory(t){function e(e,r,n){return t.invoke(e,r,{$routeParams:n.params})}return function(t){return t.router.traverseInstruction(t,function(t){var r=t.controller;return!r.canActivate||e(r.canActivate,r,t)})}}function loadTemplatesStepFactory(t,e){return function(r){return r.router.traverseInstruction(r,function(r){var n=t.template(r.component);return e(n).then(function(t){return r.template=t})})}}function activateStepValue(t){return t.router.activatePorts(t)}function pipelineProvider(){var t,e=["$setupRoutersStep","$initLocalsStep","$initControllersStep","$runCanDeactivateHookStep","$runCanActivateHookStep","$loadTemplatesStep","$activateStep"];return{steps:e.slice(0),config:function(t){e=t},$get:["$injector","$q",function(r,n){return t=e.map(function(t){return r.get(t)}),{process:function(e){function r(t){if(0===o.length)return t;var i=o.shift();return n.when(i(e)).then(r)}var o=t.slice(0);return r()}}}]}}function $componentLoaderProvider(){var t="Controller",e=function(e){return e[0].toUpperCase()+e.substr(1)+t},r=function(t){var e=dashCase(t);return"./components/"+e+"/"+e+".html"},n=function(e){return e[0].toLowerCase()+e.substr(1,e.length-t.length-1)};return{$get:function(){return{controllerName:e,template:r,component:n}},setCtrlNameMapping:function(t){return e=t,this},setComponentFromCtrlMapping:function(t){return n=t,this},setTemplateMapping:function(t){return r=t,this}}}function privatePipelineFactory(t){return t}function dashCase(t){return t.replace(/([A-Z])/g,function(t){return"-"+t.toLowerCase()})}angular.module("ngNewRouter",[]).factory("$router",routerFactory).value("$routeParams",{}).provider("$componentLoader",$componentLoaderProvider).provider("$pipeline",pipelineProvider).factory("$$pipeline",privatePipelineFactory).factory("$setupRoutersStep",setupRoutersStepFactory).factory("$initLocalsStep",initLocalsStepFactory).factory("$initControllersStep",initControllersStepFactory).factory("$runCanDeactivateHookStep",runCanDeactivateHookStepFactory).factory("$runCanActivateHookStep",runCanActivateHookStepFactory).factory("$loadTemplatesStep",loadTemplatesStepFactory).value("$activateStep",activateStepValue).directive("ngViewport",ngViewportDirective).directive("ngViewport",ngViewportFillContentDirective).directive("ngLink",ngLinkDirective).directive("a",anchorLinkDirective),angular.module("ng").provider("$controllerIntrospector",$controllerIntrospectorProvider).config(controllerProviderDecorator),controllerProviderDecorator.$inject=["$controllerProvider","$controllerIntrospectorProvider"],routerFactory.$inject=["$$rootRouter","$rootScope","$location","$$grammar","$controllerIntrospector"],ngViewportDirective.$inject=["$animate","$injector","$q","$router"],ngViewportFillContentDirective.$inject=["$compile"];var LINK_MICROSYNTAX_RE=/^(.+?)(?:\((.*)\))?$/;ngLinkDirective.$inject=["$router","$location","$parse"],anchorLinkDirective.$inject=["$router"],initControllersStepFactory.$inject=["$controller","$componentLoader"],runCanActivateHookStepFactory.$inject=["$injector"],loadTemplatesStepFactory.$inject=["$componentLoader","$templateRequest"],privatePipelineFactory.$inject=["$pipeline"],angular.module("ngNewRouter").factory("$$rootRouter",["$q","$$grammar","$$pipeline",function(t,e,r){function n(t,e,r,n){return h(e,"constructor",{value:t,configurable:!0,enumerable:!1,writable:!0}),arguments.length>3?("function"==typeof n&&(t.__proto__=n),t.prototype=g(o(n),i(e))):t.prototype=e,h(t,"prototype",{configurable:!1,writable:!1}),v(t,i(r))}function o(t){if("function"==typeof t){var e=t.prototype;if(Object(e)===e||null===e)return t.prototype;throw new TypeError("super prototype must be an Object or null")}if(null===t)return null;throw new TypeError("Super expression must either be null or a function, not "+typeof t+".")}function i(t){for(var e={},r=m(t),n=0;n<r.length;n++){var o=r[n];e[o]=d(t,o)}return e}function a(t,e){var r=y(t);do{var n=d(r,e);if(n)return n;r=y(r)}while(r);return void 0}function c(t,e,r,n){return u(t,e,r).apply(t,n)}function u(t,e,r){var n=a(e,r);return n?n.get?n.get.call(t):n.value:void 0}function s(t,e){Object.keys(t).forEach(function(r){return e(t[r],r)})}function p(e,r){return t.all(l(e,r))}function l(t,e){var r=[];return Object.keys(t).forEach(function(n){return r.push(e(t[n],n))}),r}function f(e){return e?t.when(e):t.reject()}var h=Object.defineProperty,v=Object.defineProperties,g=Object.create,d=Object.getOwnPropertyDescriptor,m=Object.getOwnPropertyNames,y=Object.getPrototypeOf,w=function(t,e,r,n){this.name=n,this.parent=r||null,this.navigating=!1,this.ports={},this.children={},this.registry=t,this.pipeline=e};n(w,{childRouter:function(){var t=void 0!==arguments[0]?arguments[0]:"default";return this.children[t]||(this.children[t]=new C(this,t)),this.children[t]},registerViewport:function(t){var e=void 0!==arguments[1]?arguments[1]:"default";return this.ports[e]=t,this.renavigate()},config:function(t){return this.registry.config(this.name,t),this.renavigate()},navigate:function(e){var r=this;if(this.navigating)return t.when();this.lastNavigationAttempt=e;var n=this.recognize(e);return n?(this._startNavigating(),n.router=this,this.pipeline.process(n).then(function(){return r._finishNavigating()},function(){return r._finishNavigating()}).then(function(){return n.canonicalUrl})):t.reject()},_startNavigating:function(){this.navigating=!0},_finishNavigating:function(){this.navigating=!1},makeDescendantRouters:function(t){this.traverseInstructionSync(t,function(t,e){e.router=t.router.childRouter(e.component)})},traverseInstructionSync:function(t,e){var r=this;s(t.viewports,function(r){return e(t,r)}),s(t.viewports,function(t){return r.traverseInstructionSync(t,e)})},traverseInstruction:function(e,r){return e?p(e.viewports,function(t,e){return f(r(t,e))}).then(function(){return p(e.viewports,function(t){return t.router.traverseInstruction(t,r)})}):t.when()},activatePorts:function(t){return this.queryViewports(function(e,r){return e.activate(t.viewports[r])}).then(function(){return p(t.viewports,function(t){return t.router.activatePorts(t)})})},canDeactivatePorts:function(t){return this.traversePorts(function(e,r){return f(e.canDeactivate(t.viewports[r]))})},traversePorts:function(t){var e=this;return this.queryViewports(t).then(function(){return p(e.children,function(e){return e.traversePorts(t)})})},queryViewports:function(t){return p(this.ports,t)},recognize:function(t){return this.registry.recognize(t)},renavigate:function(){var e=this.previousUrl||this.lastNavigationAttempt;return!this.navigating&&e?this.navigate(e):t.when()},generate:function(t,e){return this.registry.generate(t,e)}},{}),Object.defineProperty(w,"parameters",{get:function(){return[[Grammar],[Pipeline],[],[]]}}),Object.defineProperty(w.prototype.generate,"parameters",{get:function(){return[[$traceurRuntime.type.string],[]]}});var $=function(t,e){c(this,S.prototype,"constructor",[t,e,null,"/"])},S=$;n($,{},{},w),Object.defineProperty($,"parameters",{get:function(){return[[Grammar],[Pipeline]]}});var C=function(t,e){c(this,b.prototype,"constructor",[t.registry,t.pipeline,t,e]),this.parent=t},b=C;return n(C,{},{},w),new $(e,r)}]),angular.module("ngNewRouter").factory("$$grammar",["$q",function(){function t(t,n,o,i){return a(n,"constructor",{value:t,configurable:!0,enumerable:!1,writable:!0}),arguments.length>3?("function"==typeof i&&(t.__proto__=i),t.prototype=u(e(i),r(n))):t.prototype=n,a(t,"prototype",{configurable:!1,writable:!1}),c(t,r(o))}function e(t){if("function"==typeof t){var e=t.prototype;if(Object(e)===e||null===e)return t.prototype;throw new TypeError("super prototype must be an Object or null")}if(null===t)return null;throw new TypeError("Super expression must either be null or a function, not "+typeof t+".")}function r(t){for(var e={},r=p(t),n=0;n<r.length;n++){var o=r[n];e[o]=s(t,o)}return e}function n(t){return JSON.parse(JSON.stringify(t))}function o(t,e){Object.keys(t).forEach(function(r){return e(t[r],r)})}function i(t,e){var r=[];return Object.keys(t).forEach(function(n){return r.push(e(t[n],n))}),r}var a=Object.defineProperty,c=Object.defineProperties,u=Object.create,s=Object.getOwnPropertyDescriptor,p=Object.getOwnPropertyNames,l=(Object.getPrototypeOf,function(){function t(t){return"[object Array]"===Object.prototype.toString.call(t)}function e(t){this.string=t}function r(t){this.name=t}function n(t){this.name=t}function o(){}function i(t,i,a){"/"===t.charAt(0)&&(t=t.substr(1));for(var c=t.split("/"),u=[],s=0,p=c.length;p>s;s++){var l,f=c[s];(l=f.match(/^:([^\/]+)$/))?(u.push(new r(l[1])),i.push(l[1]),a.dynamics++):(l=f.match(/^\*([^\/]+)$/))?(u.push(new n(l[1])),i.push(l[1]),a.stars++):""===f?u.push(new o):(u.push(new e(f)),a.statics++)}return u}function a(t){this.charSpec=t,this.nextStates=[]}function c(t){return t.sort(function(t,e){if(t.types.stars!==e.types.stars)return t.types.stars-e.types.stars;if(t.types.stars){if(t.types.statics!==e.types.statics)return e.types.statics-t.types.statics;if(t.types.dynamics!==e.types.dynamics)return e.types.dynamics-t.types.dynamics}return t.types.dynamics!==e.types.dynamics?t.types.dynamics-e.types.dynamics:t.types.statics!==e.types.statics?e.types.statics-t.types.statics:0})}function u(t,e){for(var r=[],n=0,o=t.length;o>n;n++){var i=t[n];r=r.concat(i.match(e))}return r}function s(t){this.queryParams=t||{}}function p(t,e,r){for(var n=t.handlers,o=t.regex,i=e.match(o),a=1,c=new s(r),u=0,p=n.length;p>u;u++){for(var l=n[u],f=l.names,h={},v=0,g=f.length;g>v;v++)h[f[v]]=i[a++];c.push({handler:l.handler,params:h,isDynamic:!!f.length})}return c}function l(t,e){return e.eachChar(function(e){t=t.put(e)}),t}var f=function(){function t(t,e,r){this.path=t,this.matcher=e,this.delegate=r}function e(t){this.routes={},this.children={},this.target=t}function r(e,n,o){return function(i,a){var c=e+i;return a?void a(r(c,n,o)):new t(e+i,n,o)}}function n(t,e,r){for(var n=0,o=0,i=t.length;i>o;o++)n+=t[o].path.length;e=e.substr(n);var a={path:e,handler:r};t.push(a)}function o(t,e,r,i){var a=e.routes;for(var c in a)if(a.hasOwnProperty(c)){var u=t.slice();n(u,c,a[c]),e.children[c]?o(u,e.children[c],r,i):r.call(i,u)}}return t.prototype={to:function(t,e){var r=this.delegate;if(r&&r.willAddRoute&&(t=r.willAddRoute(this.matcher.target,t)),this.matcher.add(this.path,t),e){if(0===e.length)throw new Error("You must have an argument in the function passed to `to`");this.matcher.addChild(this.path,t,e,this.delegate)}return this}},e.prototype={add:function(t,e){this.routes[t]=e},addChild:function(t,n,o,i){var a=new e(n);this.children[t]=a;var c=r(t,a,i);i&&i.contextEntered&&i.contextEntered(n,c),o(c)}},function(t,n){var i=new e;t(r("",i,this.delegate)),o([],i,function(t){n?n(this,t):this.add(t)},this)}}(),h=["/",".","*","+","?","|","(",")","[","]","{","}","\\"],v=new RegExp("(\\"+h.join("|\\")+")","g");e.prototype={eachChar:function(t){for(var e,r=this.string,n=0,o=r.length;o>n;n++)e=r.charAt(n),t({validChars:e})},regex:function(){return this.string.replace(v,"\\$1")},generate:function(){return this.string}},r.prototype={eachChar:function(t){t({invalidChars:"/",repeat:!0})},regex:function(){return"([^/]+)"},generate:function(t){return t[this.name]}},n.prototype={eachChar:function(t){t({invalidChars:"",repeat:!0})},regex:function(){return"(.+)"},generate:function(t){return t[this.name]}},o.prototype={eachChar:function(){},regex:function(){return""},generate:function(){return""}},a.prototype={get:function(t){for(var e=this.nextStates,r=0,n=e.length;n>r;r++){var o=e[r],i=o.charSpec.validChars===t.validChars;if(i=i&&o.charSpec.invalidChars===t.invalidChars)return o}},put:function(t){var e;return(e=this.get(t))?e:(e=new a(t),this.nextStates.push(e),t.repeat&&e.nextStates.push(e),e)},match:function(t){for(var e,r,n,o=this.nextStates,i=[],a=0,c=o.length;c>a;a++)e=o[a],r=e.charSpec,"undefined"!=typeof(n=r.validChars)?-1!==n.indexOf(t)&&i.push(e):"undefined"!=typeof(n=r.invalidChars)&&-1===n.indexOf(t)&&i.push(e);return i}};var g=Object.create||function(t){function e(){}return e.prototype=t,new e};s.prototype=g({splice:Array.prototype.splice,slice:Array.prototype.slice,push:Array.prototype.push,length:0,queryParams:null});var d=function(){this.rootState=new a,this.names={}};return d.prototype={add:function(t,e){for(var r,n=this.rootState,a="^",c={statics:0,dynamics:0,stars:0},u=[],s=[],p=!0,f=0,h=t.length;h>f;f++){var v=t[f],g=[],d=i(v.path,g,c);s=s.concat(d);for(var m=0,y=d.length;y>m;m++){var w=d[m];w instanceof o||(p=!1,n=n.put({validChars:"/"}),a+="/",n=l(n,w),a+=w.regex())}var $={handler:v.handler,names:g};u.push($)}p&&(n=n.put({validChars:"/"}),a+="/"),n.handlers=u,n.regex=new RegExp(a+"$"),n.types=c,(r=e&&e.as)&&(this.names[r]={segments:s,handlers:u})},handlersFor:function(t){var e=this.names[t],r=[];if(!e)throw new Error("There is no route named "+t);for(var n=0,o=e.handlers.length;o>n;n++)r.push(e.handlers[n]);return r},hasRoute:function(t){return!!this.names[t]},generate:function(t,e){var r=this.names[t],n="";if(!r)throw new Error("There is no route named "+t);for(var i=r.segments,a=0,c=i.length;c>a;a++){var u=i[a];u instanceof o||(n+="/",n+=u.generate(e))}return"/"!==n.charAt(0)&&(n="/"+n),e&&e.queryParams&&(n+=this.generateQueryString(e.queryParams,r.handlers)),n},generateQueryString:function(e){var r=[],n=[];for(var o in e)e.hasOwnProperty(o)&&n.push(o);n.sort();for(var i=0,a=n.length;a>i;i++){o=n[i];var c=e[o];if(null!=c){var u=encodeURIComponent(o);if(t(c))for(var s=0,p=c.length;p>s;s++){var l=o+"[]="+encodeURIComponent(c[s]);r.push(l)}else u+="="+encodeURIComponent(c),r.push(u)}}return 0===r.length?"":"?"+r.join("&")},parseQueryString:function(t){for(var e=t.split("&"),r={},n=0;n<e.length;n++){var o,i=e[n].split("="),a=decodeURIComponent(i[0]),c=a.length,u=!1;1===i.length?o="true":(c>2&&"[]"===a.slice(c-2)&&(u=!0,a=a.slice(0,c-2),r[a]||(r[a]=[])),o=i[1]?decodeURIComponent(i[1]):""),u?r[a].push(o):r[a]=o}return r},recognize:function(t){var e,r,n,o,i=[this.rootState],a={},s=!1;if(o=t.indexOf("?"),-1!==o){var l=t.substr(o+1,t.length);t=t.substr(0,o),a=this.parseQueryString(l)}for(t=decodeURI(t),"/"!==t.charAt(0)&&(t="/"+t),e=t.length,e>1&&"/"===t.charAt(e-1)&&(t=t.substr(0,e-1),s=!0),r=0,n=t.length;n>r&&(i=u(i,t.charAt(r)),i.length);r++);var f=[];for(r=0,n=i.length;n>r;r++)i[r].handlers&&f.push(i[r]);i=c(f);var h=f[0];return h&&h.handlers?(s&&"(.+)$"===h.regex.source.slice(-5)&&(t+="/"),p(h,t,a)):void 0}},d.prototype.map=f,d.VERSION="VERSION_STRING_PLACEHOLDER",d}()),f="/*childRoute",h=function(){this.rules={}};t(h,{config:function(t,e){"app"===t&&(t="/"),this.rules[t]||(this.rules[t]=new v(t)),this.rules[t].config(e)},recognize:function(t){var e=void 0!==arguments[1]?arguments[1]:"/",r=this;if("undefined"!=typeof t){var n=this.rules[e];if(n){var i=n.recognize(t);if(i){var a=i[i.length-1],c=a.handler,u=a.params,s={viewports:{},params:u};if(u&&u.childRoute){var p="/"+u.childRoute;s.canonicalUrl=c.rewroteUrl.substr(0,c.rewroteUrl.length-(u.childRoute.length+1)),o(c.components,function(t,e){s.viewports[e]=r.recognize(p,t)}),s.canonicalUrl+=s.viewports[Object.keys(s.viewports)[0]].canonicalUrl}else s.canonicalUrl=c.rewroteUrl,o(c.components,function(t,e){s.viewports[e]={viewports:{}}});return o(s.viewports,function(t,e){t.component=c.components[e],t.params=u}),s}}}},generate:function(t,e){var r,n="";do{if(r=null,o(this.rules,function(o){o.hasRoute(t)&&(n=o.generate(t,e)+n,r=o)}),!r)return"";t=r.name}while("/"!==r.name);return n}},{}),Object.defineProperty(h.prototype.recognize,"parameters",{get:function(){return[[$traceurRuntime.type.string],[]]}});var v=function(t){this.name=t,this.rewrites={},this.recognizer=new l};return t(v,{config:function(t){var e=this;t instanceof Array?t.forEach(function(t){return e.configOne(t)}):this.configOne(t)},getCanonicalUrl:function(t){return"."===t[0]&&(t=t.substr(1)),(""===t||"/"!==t[0])&&(t="/"+t),o(this.rewrites,function(e,r){"/"===r?"/"===t&&(t=e):0===t.indexOf(r)&&(t=t.replace(r,e))}),t},configOne:function(t){var e=this;if(t.redirectTo){if(this.rewrites[t.path])throw new Error('"'+t.path+'" already maps to "'+this.rewrites[t.path]+'"');return void(this.rewrites[t.path]=t.redirectTo)}if(t.component){if(t.components)throw new Error('A route config should have either a "component" or "components" property, but not both.');t.components=t.component,delete t.component}"string"==typeof t.components&&(t.components={"default":t.components});var r;t.as?r=[t.as]:(r=i(t.components,function(t,e){return e+":"+t}),t.components["default"]&&r.push(t.components["default"])),r.forEach(function(r){return e.recognizer.add([{path:t.path,handler:t}],{as:r})});var o=n(t);o.path+=f,this.recognizer.add([{path:o.path,handler:o}])},recognize:function(t){var e=this.getCanonicalUrl(t),r=this.recognizer.recognize(e);return r&&(r[0].handler.rewroteUrl=e),r},generate:function(t,e){return this.recognizer.generate(t,e)},hasRoute:function(t){return this.recognizer.hasRoute(t)}},{}),new h}]);
+angular.module('app', ['ngNewRouter'])
+  .controller('AppController', ['$router', AppController]);
+
+AppController.$routeConfig = [
+  { path: '/',           component: 'lock' }
+];
+function AppController ($router) {}
+
+
+
+
+/*
+
+
+app.factory('API', function($http) {
+
+var myService = {
+    call: function() {
+                console.log(HttpUrl +"?"+ HttpQry);
+              var promise = $http.post(HttpUrl +"?"+ HttpQry).then(function (response) {
+                console.log("API CALL() "+HttpQry);
+                console.log(response);
+                return response.data;
+              });
+              return promise;
+            },
+
+  };
+
+  return myService;
+
+});*/
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="appjs" company="Wells Fargo">
-//  Wells Fargo Consumer Lending Sales Presentation
-//  Copyright ©2010 - 2020 Wells Fargo. All rights reserved.
-//  This Software is the confidential and proprietary information of Wells Fargo.
-//  Usage governed by the license agreement with Wells Fargo.
-// </copyright>
-// <summary>
-//  It Start the angularjs engine to work on html
-//  veryimportant call in the project to begin
-//	
+// <copyright file="appjs" compamy="Microtech Support"/>
+//  
 // </summary>
 // <remarks></remarks>
 // <author></author>
@@ -2689,653 +2714,8 @@ var previewimage = function(ElementName,ElementValue){
 
     }
 }
-var app = angular.module("service", []);
-var app = angular.module("app", ['service']);
 
 
-app.factory('API', function($http) {
-
-var myService = {
-    sideBar: function() {
-      var promise = $http.post(HttpUrl + "?qry=select Name from mumbra where deleted = 0 and categoy = 'Mumbra'").then(function (response) {
-        console.log(response);
-        return response.data;
-      });
-      return promise;
-    },
-
-
-    call: function() {
-                console.log(HttpUrl +"?"+ HttpQry);
-              var promise = $http.post(HttpUrl +"?"+ HttpQry).then(function (response) {
-                console.log("API CALL() "+HttpQry);
-                console.log(response);
-                return response.data;
-              });
-              return promise;
-            },
-
-  };
-
-  return myService;
-
-      });
-
-
-
-/*
-
---------Signature-------
-Created By: Nasir Sayed
-Date: 06 Dec 2014
-Reason: 
-To void angular directive in html i made this class to handle validation in one place and update all other elements. 
-Example" Alert box, Continue or submit button and red border to each element with description.
-*/
-
-//Valid directive has four attributes
-/*
-    1) Valid = "number", "text", checkbox
-    2) vmin = to check minimul length
-    3) vmax - to check maxlenght
-    4) vid to update errormsg and set auto focus 
-    5) vmsg = to show in alert box
-    6) vminval = minimum data example: 1M value shoule be entered or seleect box minimum value should be select
-
-*/
-var reName = new RegExp(/^[a-zA-Z]+$/);
-var reText = new RegExp(/^([a-zA-Z0-9 _-]+)$/);
-var reEmail = new RegExp(/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/);
-var reAddress = new RegExp(/^[0-9a-zA-Z]+$/);
-var rePostalZip = new RegExp(/^[0-9]+$/);
-var reDate = new RegExp(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/);
-var reNumber = new RegExp(/^\d*[0-9](|.\d*[0-9]|,\d*[0-9])?$/);
-app.directive('valid', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-
-            element.on('change', function (e) {
-
-                validation(element, attrs, scope, $parse);
-
-                //scope.$digest();
-                //scope.$apply();
-
-            });
-
-
-        }
-    };
-}]);
-app.directive('reset', [function ($parse) {
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function (scope, element, attrs, ngModel) {
-
-            element.on('change', function () {
-                if ($(element).is(":visible") == false || $(element).is(":disabled") == true) {
-
-                    ngModel.$setViewValue("", "");
-                    scope.$apply();
-                }
-            });
-
-
-
-        }
-    };
-}]);
-
-var validation = function (element, attr, scope, $parse) {
-    var currentValue = element.val();
-    //var attrs = attrs.valid.split("#_#");
-    
-    var type = ParameterValidation(attr,"valid");
-    var minlength = ParameterValidation(attr,"vmin");
-    var maxlength = ParameterValidation(attr,"vmax");
-    var errormsg = ParameterValidation(attr,"vmsg");
-    var minvalue = ParameterValidation(attr,"vminval");
-    var vif = ParameterValidation(attr,"vif");
-    var errorid = $(element).attr("vid");//attrs.vid;
-    var errorFlag = true;
-    var errorInfo = true;
-    if (errorid == undefined || errorid == "") {
-        errorid = Math.random();
-        $(element).attr("vid", errorid);
-
-
-    }
-
-    if (minvalue == undefined) {
-        minvalue = 0;
-    }
-    /*     console.log(currentValue);
-         console.log(minlength);
-         console.log(maxlength);
-         console.log(minvalue)
-      */
-    if (errorFlag == true && vif != undefined) {
-        var template = $parse(vif);
-        var obj;
-        obj = template(scope); // Hello Joe
-
-        if (obj == true) {
-            errorFlag = true;
-
-        } else {
-            removeError(errorid);
-            element.removeClass("ng-invalid");
-            removeErrorInfo(element);
-            return;
-        }
-    }
-    if (errorFlag == true && maxlength != undefined && currentValue.length > maxlength) {
-        if (errormsg == undefined) errormsg = "";
-        //errormsg += " value entered exceeds the maximum length";
-        errorInfo = false;
-        errorFlag = false;
-    }
-    if (errorFlag == true && minlength != undefined && currentValue.length < minlength) {
-        if (errormsg == undefined) errormsg = "";
-        //errormsg += " minimum " + minlength + " characters ";
-        errorInfo = false;
-        errorFlag = false;
-    }
-    if (errorFlag == true && type == "text" && !reText.test(currentValue)) {
-        //  failure.error[errorid] = errormsg;
-        errorFlag = false;
-        errorInfo = false;
-    }
-    if (errorFlag == true && type == "number" && !INTEGER_REGEXP.test(currentValue)) {
-        //  failure.error[errorid] = errormsg;
-        errorFlag = false;
-        errorInfo = false;
-    }
-    if (errorFlag == true && type == "email" && !reEmail.test(currentValue)) {
-        //  failure.error[errorid] = errormsg;
-        errorFlag = false;
-    }
-    if (errorFlag == true && type == "zip" && !rePostalZip.test(currentValue)) {
-        //    failure.error[errorid] = errormsg;
-        errorFlag = false;
-    }
-    if (errorFlag == true && type == "date" && !reDate.test(currentValue)) {
-        //   failure.error[errorid] = errormsg;
-        errorFlag = false;
-    }
-    if (errorFlag == true && type == "if") {
-        errorFlag = false;
-        errorInfo = false;
-    }
-    if (errorFlag == true && type == "daterange") {
-        var daterecd = Date.parse(currentValue);
-        var now = new Date();
-        var yesterdayMs = now.getTime() - 1000 * 60 * 60 * 24 * minvalue; // Offset by one day;
-        now.setTime(yesterdayMs);
-        var datemmin = Date.parse(now);
-
-        if (daterecd > datemmin) {
-            errorInfo = false;
-            errorFlag = false;
-        } else {
-            removeError(errorid);
-            element.removeClass("ng-invalid");
-            removeErrorInfo(element);
-            return;
-        }
-
-    }
-    if (errorFlag == true && type == "name" && !reName.test(currentValue)) {
-        //   failure.error[errorid] = errormsg;
-        errorFlag = false;
-    }
-    if (errorFlag == true && type == "addr" && !reAddress.test(currentValue)) {
-        //   failure.error[errorid] = errormsg;
-        errorFlag = false;
-    }
-    if (errorFlag == true && type == "phone" && !reNumber.test(currentValue)) {
-        //   failure.error[errorid] = errormsg;
-        errorFlag = false;
-    }
-    if (errorFlag == true && type == "select" && currentValue == "") {
-        //   failure.error[errorid] = errormsg;
-        errorFlag = false;
-    }
-    if (errorFlag == true && parseInt(minvalue) > parseInt(currentValue)) {
-        if (errormsg == undefined) errormsg = "";
-        //errormsg += " minimum " + minvalue + " value expecting";
-        errorInfo = false;
-        errorFlag = false;
-    }
-    if (errorFlag == true && type.indexOf("[") != -1 && currentValue != "") {
-        var testExp = new RegExp(type);
-        if (testExp.test(currentValue) == false) {
-            errorFlag = false;
-        }
-    }
-    if (errorFlag == true && type.indexOf("[") == -1 && currentValue == "") {
-        //    failure.error[errorid] = errormsg;
-        errorFlag = false;
-
-    }
-
-
-
-    try {
-        if (errorFlag == false) {
-            addOrUpdateError(errorid, errormsg);
-            //ngModel.$setValidity('invalid', false);
-            element.addClass("error");
-            if (errormsg == ""){
-                errormsg = "Please provide the required information highlighted in red";
-            }
-            toastr.error(errormsg, "Validation");            if (errorInfo == false) {
-                addErrorInfo(element, errormsg);
-            }
-
-
-            //This condition only for SVP Template...
-            /*   if (type == "select") {
-               svpApp.util.buildSelects();
-            }*/
-            //This condition only for SVP Template...
-
-        } else {
-            removeError(errorid);
-            element.removeClass("error");
-
-            removeErrorInfo(element);
-
-        }
-
-    } catch (e) {
-        alert("error " + e)
-    }
-}
-var addErrorInfo = function (element, errormsg) {
-    if (errormsg != undefined) {
-        var obj = element.parent();
-        if (obj != undefined) {
-            if (obj.find(".infoicon").length == 0) {
-
-                obj.append('<a href="javascript:void(0)"  class="infoicon infoicon-error" data-toggle="tooltip" data-placement="right" title="' + errormsg + '">&nbsp;</a>');
-                $('[data-toggle="tooltip"]').tooltip();
-            }
-        }
-    }
-}
-var removeErrorInfo = function (element) {
-    var obj = element.parent();
-    if (obj != undefined) {
-        if (obj.find(".infoicon").length > 0) {
-            var removeObj = obj.find(".infoicon");
-            removeObj.remove();
-        }
-    }
-}
-var ParameterValidation = function (attrs, key) {
-    //This function will break vaildation parameter and return key value pair 
-    var obj = attrs.valid.split("#_#");
-    for (var i = 0; i <= obj.length - 1; i++) {
-        var spl = obj[i].split("=");
-        if (spl[0] == key) {
-            return spl[1];
-            
-        }
-    }
-    return undefined;
-    
-
-
-}
-var addOrUpdateError = function (errorid, errormsg) {
-    //Add / Update Error Summary
-    if (pageError.errorSummary.length != 0) {
-        var alreadyErrorIdExists = false;
-        for (var j = 0; j < pageError.errorSummary.length; j++) {
-            if (pageError.errorSummary[j] != null && pageError.errorSummary[j].errorId == errorid) {
-                alreadyErrorIdExists = true;
-                pageError.errorSummary[j].errorId = errorid;
-                pageError.errorSummary[j].errorMsg = errormsg;
-
-            }
-        }
-        if (alreadyErrorIdExists == false) {
-            pageError.errorSummary.push({ errorId: errorid, errorMsg: errormsg });
-        }
-    } else {
-        pageError.errorSummary.push({ errorId: errorid, errorMsg: errormsg });
-    }
-   
-};
-
-var removeError = function (errorid) {
-    //If the user updated correct value then remove that error
-
-    for (var i = 0; i < pageError.errorSummary.length; i++) {
-        if (pageError.errorSummary[i] != null) {
-            if (pageError.errorSummary[i] != undefined && pageError.errorSummary[i].errorId == errorid) {
-                //delete failure.errorSummary[i];
-                pageError.errorSummary.splice(i, 1);
-                break;
-            }
-        }
-    }
-    //setIframeHeight("ScsNavigator_wealthCreditDetailCtl_appHost");
-};
-
-
-
-var pageError = {
-    submit: false,
-    error: {},
-    errorSummary: []
-};
-var INTEGER_REGEXP = /^\-?\d+$/;
-
-var pageValidator = function (Parent) {
-
-
-    /*
-        $.each($("[reset]"), function (i, j) {
-            if ($(j).is(":visible") == false || $(j).is(":disabled") == true) {
-            //    $(j).trigger("change");
-               
-            }
-        });*/
-    setTimeout(function () {
-        svpApp.util.buildSelects();
-    }, 100);
-
-    var searchObjStart = null;
-    if (Parent == "modal") {
-        searchObjStart = $(".modalcontainer").find("[valid]");
-    }
-    if (searchObjStart == null) {
-        searchObjStart = $("[valid]");
-    }
-    $.each($(searchObjStart), function (i, j) {
-        if ($(j).is(":visible") == false || $(j).is(":disabled") == true) {
-            $(j).removeClass("ng-invalid");
-            removeError($(j).attr("vid"));
-        } else {
-            $(j).trigger('change');
-        }
-
-
-    });
-
-    //console.log(failure);
-    var submitFlag = true;
-    var scrollToId = "";
-    angular.forEach(pageError.errorSummary, function (object, index) {
-        if (object != undefined && object.errorMsg != "") {
-            submitFlag = false;
-            $("[vid='" + object.errorId + "']").addClass("ng-invalid");
-            if (scrollToId == "")
-                scrollToId = "[vid = '" + object.errorId + "']";
-        }
-    });
-    pageError.submit = submitFlag;
-    try {
-        if (scrollToId != "") {
-            $('html, body').scrollTop(0);
-            $(parent.window).scrollTop(0);
-        }
-    } catch (e) {
-    }
-    return pageError.submit;
-}
-
-var tempRepeat = [
-
-  { label: 'Select', value: "" },
-  { label: 'John', value: 25 },
-  { label: 'Jessie', value: 30 },
-  { label: 'Johanna', value: 28 },
-  { label: 'Joy', value: 15 },
-  { label: 'Mary', value: 28 },
-  { label: 'Peter', value: 95 },
-  { label: 'Sebastian', value: 50 },
-  { label: 'Erika', value: 27 },
-  { label: 'Patrick', value: 40 },
-  { label: 'Samantha', value: 60 }
-]
-
-
-
-
-
-var jColSize = [
-    
-        { label: 'Free Size', value: '' },
-        { label: 'Size 1', value: 'col-sm-1' },
-        { label: 'Size 2', value: 'col-sm-2' },
-         { label: 'Size 3', value: 'col-sm-3' },
-    { label: 'Size 4', value: 'col-sm-4' },
-        { label: 'Size 5', value: 'col-sm-5' },
-         { label: 'Size 6', value: 'col-sm-6' },
-    { label: 'Size 7', value: 'col-sm-7' },
-        { label: 'Size 8', value: 'col-sm-8' },
-         { label: 'Size 9', value: 'col-sm-9' },
-    { label: 'Size 10', value: 'col-sm-10' },
-        { label: 'Size 11', value: 'col-sm-11' },
-         { label: 'Size 12', value: 'col-sm-12' },
-    { label: 'Pull Right', value: 'pull-right' },
-        { label: 'pull left', value: 'pull-left' }
-]
-var jLayoutSize = [
-
-        { label: 'Single Cols', value: 'col-sm-12' },
-        { label: 'Two Cols', value: 'col-sm-6' },
-        { label: 'Multi Cols', value: 'col-sm-3' },
-        
-        
-]
-jLayoutSize = jLayoutSize.concat(jColSize);
-
-var jDBFields = [
-                   
-                   { label: 'Name', value: 'Name' },
-                   { label: 'Register Mobile', value: 'Intensity' },
-                  { label: 'Category', value: 'categoy' },
-                 { label: 'Lat & Lng', value: 'lat_lng' },
-                 { label: 'Item Type', value: 'sublevel' },
-                 { label: 'Logo', value: 'logo' },
-                 { label: 'Picture', value: 'picture' },
-                 { label: 'Price', value: 'remedies.Price' },
-                 { label: 'HTML', value: 'remedies.Html' },
-                 { label: 'Phone', value: 'remedies.Phone' },
-                 { label: 'Time (Eg. 20Min Left)', value: 'remedies.Time' },
-                 { label: 'Hours (Eg. Open 9AM to 10PM)', value: 'remedies.Hours' },
-                 { label: 'Address', value: 'remedies.Address' },
-                 { label: 'Description', value: 'remedies.Details' },
-                 { label: 'Menu', value: 'remedies.Menu' },
-                 { label: 'Group Name', value: 'remedies.Group_' },
-                 { label: 'Website', value: 'remedies.Website' },
-                 { label: 'Email', value: 'remedies.Email' },
-                 { label: 'Check Item', value: 'remedies.chk~Group_' },
-                 { label: 'Other (Ex. remedies.***)', value: 'remedies.' },
-                   
-                   ]
-
-
-
-
-  var  JStaticData = [
-                 { label:"Office Time (9 Hours)", value : [
-                                                 { label: '7:00AM to 3:00PM', value: '7:00AM to 3:00PM' },
-                                                 { label: '8:00AM to 4:00PM', value: '8:00AM to 4:00PM' },
-                                                 { label: '9:00AM to 5:00PM', value: '9:00AM to 5:00PM' },
-                                                 { label: '10:00AM to 6:00PM', value: '10:00AM to 6:00PM' },
-                                                 { label: '11:00AM to 7:00PM', value: '11:00AM to 7:00PM' },
-                                                 { label: '12:00AM to 8:00PM', value: '12:00AM to 8:00PM' },
-                                                 { label: '1:00PM to 9:00PM', value: '1:00PM to 9:00PM' },
-                                                           { label: '2:00PM to 10:00PM', value: '2:00PM to 10:00PM' },
-                                                           { label: '3:00PM to 11:00PM', value: '3:00PM to 11:00PM' },
-                                                           { label: '4:00PM to 12:00PM', value: '3:00PM to 12:00AM' },
-                                                 ]
-                 },{ label:"Restaurant Time", value : [
-                                                       { label: 'Name', value: 'Name' },
-                                                       { label: 'Register Mobile', value: 'Intensity' },
-                                                       { label: 'Category', value: 'categoy' },
-                                                       
-                                                       ]
-                 },{ label:"School Time", value : [
-                                                   { label: 'Name', value: 'Name' },
-                                                   { label: 'Register Mobile', value: 'Intensity' },
-                                                   { label: 'Category', value: 'categoy' },
-                                                   
-                                                   ]
-                 },{ label:"Classes Time", value : [
-                                                    { label: 'Name', value: 'Name' },
-                                                    { label: 'Register Mobile', value: 'Intensity' },
-                                                    { label: 'Category', value: 'categoy' },
-                                                    
-                                                    ]
-                 },{ label:"Booking Time", value : [
-                                                    { label: 'Name', value: 'Name' },
-                                                    { label: 'Register Mobile', value: 'Intensity' },
-                                                    { label: 'Category', value: 'categoy' },
-                                                    
-                                                    ]
-                 },{ label:"Namaz Time", value : [
-                                                  { label: 'Fazar', value: 'Name' },
-                                                  { label: 'Register Mobile', value: 'Intensity' },
-                                                  { label: 'Category', value: 'categoy' },
-                                                  
-                                                  ]
-                 }
-                 ]
-
-
-var jMenu = [
-        { title: 'Reset', href: 'somevalue' },
-        { title: 'Delete', href: 'myvalue' },
-         { title: 'Your Menu', href: 'myvalue' }
-]
-
-
-
-
-
-var jLayout = [
-
-    {title:'Select', value:"Select"},
-    {title:'Row', value:"Row"},
-    {title:'Col', value:"Col"},
-    {title:'iBox', value:"iBox"},
-    {title:'iBoxCard', value:"iBoxCard"},
-    {title:'iBoxChat', value:"iBoxChat"},
-    {title:'iBoxChatWindow', value:"iBoxChatWindow"},
-    {title:'iBoxCheckList', value:"iBoxCheckList"},
-    {title:'iBoxFeed', value:"iBoxFeed"},
-    {title:'iBoxFrame', value:"iBoxFrame"},
-    {title:'iBoxFramePoster', value:"iBoxFramePoster"},
-    {title:'iBoxFrameSquare', value:"iBoxFrameSquare"},
-    {title:'iBoxFrameSquareOrange', value:"iBoxFrameSquareOrange"},
-    {title:'iBoxGallery', value:"iBoxGallery"},
-    {title:'iBoxGalleryCaption', value:"iBoxGalleryCaption"},
-    {title:'iBoxGallerySlider', value:"iBoxGallerySlider"},
-    {title:'iBoxIcons', value:"iBoxIcons"},
-    {title:'iBoxInfoLike', value:"iBoxInfoLike"},
-    {title:'iBoxInfoTextView', value:"iBoxInfoTextView"},
-    {title:'iBoxInfoUser', value:"iBoxInfoUser"},
-    {title:'iBoxIPinBoard', value:"iBoxIPinBoard"},
-    {title:'iBoxList', value:"iBoxList"},
-    {title:'iBoxMultipleHCols', value:"iBoxMultipleHCols"},
-
-
-    {title:'iBoxMultipleVRows', value:"iBoxMultipleVRows"},
-    {title:'iBoxPoster', value:"iBoxPoster"},
-    {title:'iBoxProfile', value:"iBoxProfile"},
-    {title:'iBoxQuestionFAQ', value:"iBoxQuestionFAQ"},
-    {title:'iBoxSimpleCard', value:"iBoxSimpleCard"},
-
-
-    {title:'iBoxSimpleChat', value:"iBoxSimpleChat"},
-    {title:'iBoxSimpleComments', value:"iBoxSimpleComments"},
-    {title:'iBoxSimplePoster', value:"iBoxSimplePoster"},
-    {title:'iBoxTab', value:"iBoxTab"},
-    {title:'iBoxTable', value:"iBoxTable"},
-
-
-    {title:'iBoxTablePreview', value:"iBoxTablePreview"},
-    {title:'iBoxTablePreviewWithMap', value:"iBoxTablePreviewWithMap"},
-    {title:'iBoxTableWithButtonText', value:"iBoxTableWithButtonText"},
-    {title:'iBoxTabPanel', value:"iBoxTabPanel"},
-    {title:'iBoxTimeLine', value:"iBoxTimeLine"},
-
-
-
-    {title:'iBoxVideo', value:"iBoxVideo"},
-    {title:'iBoxVideoDescription', value:"iBoxVideoDescription"},
-    {title:'iBoxTableWithButtonText', value:"iBoxTableWithButtonText"},
-    {title:'iBoxWebsite', value:"iBoxWebsite"},
-
-
-
-    {title:'iBoxIcons', value:"iBoxIcons"},
-    {title:'iBoxButtons', value:"iBoxButtons"},
-
-
-]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var jFieldsForm4 = {
-    data: [
-        { phone: "(123) 456-7890", address: "795 Folsom Ave ", company: "Twitter, In", location: "Riviera State 456/4566", designation: "Graphics designer", src: 'a2', cls: "img-circle m-t-xs img-responsive" },
-        
-         { phone: "(345) 567-3456", address: "Harrison,\n Santa Clara", company: "Yahoo, Inc", location: "Van Nuys State 32/106", designation: "Software designer", src: 'a4', cls: "img-circle m-t-xs img-responsive" },
-        
-         { phone: "(567) 456-7890", address: "1220 Concord Ave\n Concord", company: "Microsoft", location: "Mark Street 65/345", designation: "Marketing", src: 'a3', cls: "img-circle m-t-xs img-responsive" },
-        
-        { phone: "(345) 567-3456", address: "1239 Harrison St, \n Santa Clara", company: "Yahoo, Inc", location: "Van Nuys State 32/106", designation: "Software designer", src: 'a5', cls: "img-circle m-t-xs img-responsive" },
-        
-
-         { phone: "(567) 456-7890", address: "1220 Concord Ave\n Concord", company: "Microsoft", location: "Mark Street 65/345", designation: "Marketing", src: 'a1', cls: "img-circle m-t-xs img-responsive" },
-        
-         { phone: "(123) 456-7890", address: "795 Folsom Ave, Suite 600\n San Francisco", company: "Twitter, In", location: "Riviera State 456/4566", designation: "Graphics designer", src: 'a7', cls: "img-circle m-t-xs img-responsive" },
-
-    ]
-
-};
 var Root = {
 	"Bill_No":"",
 	"det":[],
@@ -3353,77 +2733,78 @@ function printContent(el){
 
 var ChangeEvent = false;
 
-app.controller("BillController", ['$scope','API','$http','$compile','$location','$anchorScroll', function ($scope,API,$http,$compile,$location,$anchorScroll) {
+angular.module('app', [])
+.controller("BillingController", ['API','$http','$compile','$location','$anchorScroll', function (API,$http,$compile,$location,$anchorScroll) {
 	HttpUrl = "Qry/billq.php";
-    
-	$scope.isDeveloperMode = false;
+    var vm = this;
+	vm.isDeveloperMode = false;
 	if(window.location.toString().indexOf("file:") != -1)
 	{
-		$scope.isDeveloperMode  = true;
+		vm.isDeveloperMode  = true;
 	}
-    $scope.Page = "Details";
-    $scope.webdata = "";
+    vm.Page = "Details";
+    vm.webdata = "";
 	
-    $scope.OpenAllPanel = true;
-	$scope.btnDisOn = false;
-	$scope.btnCustOn = true;
-	$scope.btnCCOn = true;
-	$scope.btnFOCOn = true;
-	$scope.id = params['id'];
-	$scope.BillList = {};
+    vm.OpenAllPanel = true;
+	vm.btnDisOn = false;
+	vm.btnCustOn = true;
+	vm.btnCCOn = true;
+	vm.btnFOCOn = true;
+	vm.id = params['id'];
+	vm.BillList = {};
 	 
-	$scope.Bill_No_Look = window.localStorage.getItem("Bill_No");
+	vm.Bill_No_Look = window.localStorage.getItem("Bill_No");
 	
 	var LoadData = window.localStorage.getItem("BillList");
 	if (LoadData != null){
 		 try{
-	 		$scope.BillList = JSON.parse(LoadData);
+	 		vm.BillList = JSON.parse(LoadData);
 		 }catch(E){ c
 		 	onsole.log("error in BillList storage")}
-		 	console.log($scope.BillList);
+		 	console.log(vm.BillList);
  	}
-	$scope.model = Root;
+	vm.model = Root;
     	
-	$scope.tempModel = {};
-	//$scope.model.GiftVouchers = {};
+	vm.tempModel = {};
+	//vm.model.GiftVouchers = {};
 
 	var LoadData = window.localStorage.getItem("BarcodeModel");
 	
 	if (LoadData != null){
 		try{
 			if (LoadData.indexOf("No data found") != -1 || LoadData.indexOf("-error-") != -1){
-				$scope.tempModel ={};
+				vm.tempModel ={};
 			}
 			else{
-				$scope.tempModel = JSON.parse(LoadData);
+				vm.tempModel = JSON.parse(LoadData);
 			}
 		}catch(E){ 
 			console.log("error in BillList storage")}
-		 	console.log($scope.tempModel);
+		 	console.log(vm.tempModel);
  	}
 
-	$scope.StartCalculation = false;
+	vm.StartCalculation = false;
 	
-	$scope.takehim = function(TakeHimTo){
+	vm.takehim = function(TakeHimTo){
 		setTimeout(function(){
 			$location.hash(TakeHimTo);
 			$anchorScroll();
 		},500);
 	}
 	
-	$scope.SearchBar = function(SearchTerm){
+	vm.SearchBar = function(SearchTerm){
 
-		$scope.Bill_No = SearchTerm;
+		vm.Bill_No = SearchTerm;
 		SearchList(SearchTerm);
 		
 	}
 	
-	$scope.DoCalculation = function(){
-		$scope.StartCalculation = true;
+	vm.DoCalculation = function(){
+		vm.StartCalculation = true;
 
-		console.log($scope.StartCalculation);
+		console.log(vm.StartCalculation);
 
-		var c = $scope.model;
+		var c = vm.model;
 		var totalMRP;
 		var discountVal;
 		
@@ -3464,12 +2845,12 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 		c.Balance_val -= c.Coupon_Amt_val;
 		c.Balance_val -= c.Gift_Voucher_Amount;
 		c.Balance_val = Math.round(c.Balance_val);
-		//$scope.$apply();
-	 	//console.log($scope.model.GiftVouchers.Total_Amount); 
+		//vm.$apply();
+	 	//console.log(vm.model.GiftVouchers.Total_Amount); 
 	}
 	
-	$scope.ExchangeSalesDet = function(modelDet){
-		console.log($scope);
+	vm.ExchangeSalesDet = function(modelDet){
+		console.log(vm);
 		 HttpQry = "action=ExchangeSalesDet&qry=" + modelDet.id_web;
          API.call().then(function (response) {
 
@@ -3485,7 +2866,7 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 								 return;
 							 }
 						 	 modelDet.remove = 0;
-							 $scope.DoCalculation();
+							 vm.DoCalculation();
 		
                         }catch(e){
                             console.log(e);
@@ -3496,8 +2877,8 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
                  });
 	}
 
-	$scope.DeleteSalesDet = function(modelDet){
-		console.log($scope);
+	vm.DeleteSalesDet = function(modelDet){
+		console.log(vm);
 		HttpQry = "action=DeleteSalesDet&qry=" + modelDet.id_web;
         API.call().then(function (response) {
             try{
@@ -3511,7 +2892,7 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 						return;
 					}
 					modelDet.remove = 1;
-					$scope.DoCalculation();
+					vm.DoCalculation();
                 }catch(e){
                     console.log(e);
                         toastr.error("error " + e, "Status"); 
@@ -3519,7 +2900,7 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
         });
 	}
 
-	$scope.SearchBarcode = function(BarcodeNo){
+	vm.SearchBarcode = function(BarcodeNo){
 		 
 		if (BarcodeNo == undefined) return;
 		HttpQry = "action=SearchBarcode&qry=" + BarcodeNo;
@@ -3531,34 +2912,34 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 				console.log("------response End---------");
 				if (response.indexOf("No data found") != -1 || response.indexOf("-error-") != -1){
 				console.log("-------- LoadData.indexOf(No data found) ----")
-				$scope.tempModel = {};
+				vm.tempModel = {};
 				return;
 				}
- 				$scope.tempModel.Qty_val =  angular.copy(response[0].Default_Size_val);
+ 				vm.tempModel.Qty_val =  angular.copy(response[0].Default_Size_val);
 
- 				$scope.tempModel.MRP_val =  angular.copy(response[0].MRP_val);
+ 				vm.tempModel.MRP_val =  angular.copy(response[0].MRP_val);
 
- 				$scope.tempModel.SalesManCode =  angular.copy(response[0].SalesManCode);
+ 				vm.tempModel.SalesManCode =  angular.copy(response[0].SalesManCode);
 
- 				$scope.tempModel.Tax_per_val =  angular.copy(response[0].Tax_val);
+ 				vm.tempModel.Tax_per_val =  angular.copy(response[0].Tax_val);
 							  
-				$scope.tempModel.UOM =   angular.copy(response[0].UOM);
+				vm.tempModel.UOM =   angular.copy(response[0].UOM);
 
- 				$scope.tempModel.Product_Type =  angular.copy(response[0].Product_Type);
+ 				vm.tempModel.Product_Type =  angular.copy(response[0].Product_Type);
 
- 				$scope.tempModel.category =  angular.copy(response[0].Category);
+ 				vm.tempModel.category =  angular.copy(response[0].Category);
  						      			  
-				$scope.tempModel.Barcode_No =  angular.copy(response[0].Barcode_No);
+				vm.tempModel.Barcode_No =  angular.copy(response[0].Barcode_No);
 							  
-				$scope.model.Qty_In_Stock_val =  angular.copy(response[0].Qty_In_Stock_val);
+				vm.model.Qty_In_Stock_val =  angular.copy(response[0].Qty_In_Stock_val);
 
-				$scope.tempModel.remove =  0;
+				vm.tempModel.remove =  0;
 				
-				$scope.tempModel.Disc_per_item =  0;			
+				vm.tempModel.Disc_per_item =  0;			
 				
-				console.log($scope.tempModel);
+				console.log(vm.tempModel);
   				
-  				localStorage.setItem('BarcodeModel', JSON.stringify($scope.tempModel));
+  				localStorage.setItem('BarcodeModel', JSON.stringify(vm.tempModel));
         
                 }catch(e){
                 	console.log(e);
@@ -3567,7 +2948,7 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
         });
 	 }
 
-	$scope.New = function(){	
+	vm.New = function(){	
 	 	HttpQry = "action=NewSales";
         API.call().then(function (response) {
             try{
@@ -3579,13 +2960,13 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 					console.log("-------- LoadData.indexOf(No data found) ----")
 					return;
 				}
-				$scope.model = Root;
-				$scope.model.Bill_No = response;
-				//localStorage.setItem('Bill_No', $scope.model.Bill_No);
-				$scope.Search($scope.model.Bill_No);
-				$scope.OpenAllPanel = true;
-				$scope.btnCCOn = true;
-				$scope.btnCustOn = true;
+				vm.model = Root;
+				vm.model.Bill_No = response;
+				//localStorage.setItem('Bill_No', vm.model.Bill_No);
+				vm.Search(vm.model.Bill_No);
+				vm.OpenAllPanel = true;
+				vm.btnCCOn = true;
+				vm.btnCustOn = true;
                 }catch(e){
                 	console.log(e);
                 	toastr.error("error " + e, "Status");          
@@ -3595,35 +2976,35 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 		
 	}
 
-	$scope.addItem = function(){
-		$scope.tempModel.Bill_No = $scope.model.Bill_No;
-		console.log($scope.tempModel.id_web);
-        console.log($scope.tempModel.Disc_per_item);
-        /*var old_MRP_val = $scope.tempModel.MRP_val;
-        var totalMRP = $scope.tempModel.MRP_val * $scope.tempModel.Qty_val;
-		if($scope.tempModel.Disc_per_item != 0 || $scope.tempModel.Disc_per_item != '')
+	vm.addItem = function(){
+		vm.tempModel.Bill_No = vm.model.Bill_No;
+		console.log(vm.tempModel.id_web);
+        console.log(vm.tempModel.Disc_per_item);
+        /*var old_MRP_val = vm.tempModel.MRP_val;
+        var totalMRP = vm.tempModel.MRP_val * vm.tempModel.Qty_val;
+		if(vm.tempModel.Disc_per_item != 0 || vm.tempModel.Disc_per_item != '')
 		{
 			 
-			var discountVal = ( totalMRP * $scope.tempModel.Disc_per_item)/100;
+			var discountVal = ( totalMRP * vm.tempModel.Disc_per_item)/100;
 			totalMRP = totalMRP - discountVal;	
 		//	console.log(totalMRP);		
 		}
 		console.log(totalMRP);
-		$scope.tempModel.MRP_val = Math.round(totalMRP);*/
+		vm.tempModel.MRP_val = Math.round(totalMRP);*/
 
-        $.post(HttpUrl,{qry:$scope.tempModel,action:"SaveSalesDet"},function(data){
+        $.post(HttpUrl,{qry:vm.tempModel,action:"SaveSalesDet"},function(data){
         	     console.log(data);
         	     console.log(data.indexOf("-Error-"));
 		  	var NewItem = {};
-		  	NewItem.Qty_val =  angular.copy($scope.tempModel.Qty_val);
-	      	NewItem.MRP_val =  angular.copy($scope.tempModel.MRP_val);
-	      	NewItem.SalesManCode =  angular.copy($scope.tempModel.SalesManCode);
-	      	NewItem.Tax_per_val =  angular.copy($scope.tempModel.Tax_per_val);
-		  	NewItem.UOM =   angular.copy($scope.tempModel.UOM);
-	      	NewItem.Product_Type =  angular.copy($scope.tempModel.Product_Type);    	  
-		  	NewItem.category = angular.copy($scope.tempModel.category);
-		  	NewItem.Barcode_No =  angular.copy($scope.tempModel.Barcode_No);
-		  	NewItem.Disc_per_item =  angular.copy($scope.tempModel.Disc_per_item);
+		  	NewItem.Qty_val =  angular.copy(vm.tempModel.Qty_val);
+	      	NewItem.MRP_val =  angular.copy(vm.tempModel.MRP_val);
+	      	NewItem.SalesManCode =  angular.copy(vm.tempModel.SalesManCode);
+	      	NewItem.Tax_per_val =  angular.copy(vm.tempModel.Tax_per_val);
+		  	NewItem.UOM =   angular.copy(vm.tempModel.UOM);
+	      	NewItem.Product_Type =  angular.copy(vm.tempModel.Product_Type);    	  
+		  	NewItem.category = angular.copy(vm.tempModel.category);
+		  	NewItem.Barcode_No =  angular.copy(vm.tempModel.Barcode_No);
+		  	NewItem.Disc_per_item =  angular.copy(vm.tempModel.Disc_per_item);
 	  		
 	  		if(data.indexOf("-Error-") == -1)
 	  		{
@@ -3634,98 +3015,98 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 		  	NewItem.remove =  0;
 		  	console.log('new');
 		  	console.log(NewItem);
-		  	if($scope.tempModel.id_web == undefined || $scope.tempModel.id_web == '' )
+		  	if(vm.tempModel.id_web == undefined || vm.tempModel.id_web == '' )
 		  	{
-		  			$scope.model.det.push(NewItem);
-		  			console.log('u'+$scope.model.det);	
+		  			vm.model.det.push(NewItem);
+		  			console.log('u'+vm.model.det);	
 		  	}
 		  	else
 		  	{
-		  		for(var i = 0; i <= $scope.model.det.length -1 ;i++){
+		  		for(var i = 0; i <= vm.model.det.length -1 ;i++){
 					
-					if($scope.model.det[i].id_web == $scope.tempModel.id_web)
+					if(vm.model.det[i].id_web == vm.tempModel.id_web)
 					{
-						$scope.model.det[i].Qty_val =  angular.copy($scope.tempModel.Qty_val);
-	      				$scope.model.det[i].MRP_val =  angular.copy($scope.tempModel.MRP_val);
-	      				$scope.model.det[i].SalesManCode =  angular.copy($scope.tempModel.SalesManCode);
-	      				$scope.model.det[i].Tax_per_val =  angular.copy($scope.tempModel.Tax_per_val);
-	  	  				$scope.model.det[i].UOM =   angular.copy($scope.tempModel.UOM);
-	    				$scope.model.det[i].Product_Type =  angular.copy($scope.tempModel.Product_Type);
-    	  				$scope.model.det[i].category = angular.copy($scope.tempModel.category);
-		   				$scope.model.det[i].Barcode_No =  angular.copy($scope.tempModel.Barcode_No);
-		  				$scope.model.det[i].Disc_per_item =  angular.copy($scope.tempModel.Disc_per_item);
+						vm.model.det[i].Qty_val =  angular.copy(vm.tempModel.Qty_val);
+	      				vm.model.det[i].MRP_val =  angular.copy(vm.tempModel.MRP_val);
+	      				vm.model.det[i].SalesManCode =  angular.copy(vm.tempModel.SalesManCode);
+	      				vm.model.det[i].Tax_per_val =  angular.copy(vm.tempModel.Tax_per_val);
+	  	  				vm.model.det[i].UOM =   angular.copy(vm.tempModel.UOM);
+	    				vm.model.det[i].Product_Type =  angular.copy(vm.tempModel.Product_Type);
+    	  				vm.model.det[i].category = angular.copy(vm.tempModel.category);
+		   				vm.model.det[i].Barcode_No =  angular.copy(vm.tempModel.Barcode_No);
+		  				vm.model.det[i].Disc_per_item =  angular.copy(vm.tempModel.Disc_per_item);
 					}
-					//console.log($scope.model.det[1]);
+					//console.log(vm.model.det[1]);
 				}
 		  	}
 		 	
 		 	
-		 	$scope.DoCalculation();
-		 	$scope.$apply();
+		 	vm.DoCalculation();
+		 	vm.$apply();
  	 	 	localStorage.setItem('BarcodeModel', JSON.stringify(NewItem));
-		 	//console.log($scope.model.det);
+		 	//console.log(vm.model.det);
 		  	toastr.success( data, "Status");
-	  	 	 $scope.SearchBarcode($scope.model.Barcode_No);
+	  	 	 vm.SearchBarcode(vm.model.Barcode_No);
          	setTimeout(function() { init(); }, 500);
         })
 	}
 
-	$scope.editItem=function(item){
+	vm.editItem=function(item){
 		console.log(item);
-		$scope.tempModel.Barcode_No = item.Barcode_No;
-		$scope.tempModel.Qty_val = item.Qty_val;
-		$scope.tempModel.MRP_val = item.MRP_val;
-		$scope.tempModel.Product_Type = item.Product_Type;
-		$scope.tempModel.category = item.category;
-		$scope.tempModel.UOM = item.UOM;
-		$scope.tempModel.SalesManCode = item.SalesManCode;
-		$scope.tempModel.Tax_per_val = item.Tax_per_val;
-		$scope.tempModel.Disc_per_item = item.Disc_per_item;
-		$scope.tempModel.id_web = item.id_web;		
+		vm.tempModel.Barcode_No = item.Barcode_No;
+		vm.tempModel.Qty_val = item.Qty_val;
+		vm.tempModel.MRP_val = item.MRP_val;
+		vm.tempModel.Product_Type = item.Product_Type;
+		vm.tempModel.category = item.category;
+		vm.tempModel.UOM = item.UOM;
+		vm.tempModel.SalesManCode = item.SalesManCode;
+		vm.tempModel.Tax_per_val = item.Tax_per_val;
+		vm.tempModel.Disc_per_item = item.Disc_per_item;
+		vm.tempModel.id_web = item.id_web;		
 	}
 
-	$scope.addGiftVoucher=function(){		
-			console.log($scope.model.Gift);
+	vm.addGiftVoucher=function(){		
+			console.log(vm.model.Gift);
 
-			var Calc_Amount = $scope.model.Gift.Gift_Voucher_Amount * $scope.model.Gift.Gift_Voucher_No;
-	        $scope.model.Gift.Total_Amount = Calc_Amount;
-	        $scope.model.Gift.Bill_No = $scope.model.Bill_No;
-	        $.post(HttpUrl,{qry:$scope.model.Gift,action:"Gift_Voucher"},function(data){
+			var Calc_Amount = vm.model.Gift.Gift_Voucher_Amount * vm.model.Gift.Gift_Voucher_No;
+	        vm.model.Gift.Total_Amount = Calc_Amount;
+	        vm.model.Gift.Bill_No = vm.model.Bill_No;
+	        $.post(HttpUrl,{qry:vm.model.Gift,action:"Gift_Voucher"},function(data){
         	     console.log(data);
 		  
         	var NewGiftVoucher = {};
-			NewGiftVoucher.Gift_Voucher_Type =  angular.copy($scope.model.Gift.Gift_Voucher_Type);
-			NewGiftVoucher.Gift_Voucher_Amount =  angular.copy($scope.model.Gift.Gift_Voucher_Amount);
-			NewGiftVoucher.Gift_Voucher_No =  angular.copy($scope.model.Gift.Gift_Voucher_No);
+			NewGiftVoucher.Gift_Voucher_Type =  angular.copy(vm.model.Gift.Gift_Voucher_Type);
+			NewGiftVoucher.Gift_Voucher_Amount =  angular.copy(vm.model.Gift.Gift_Voucher_Amount);
+			NewGiftVoucher.Gift_Voucher_No =  angular.copy(vm.model.Gift.Gift_Voucher_No);
 			NewGiftVoucher.Total_Amount =  Calc_Amount;
-			NewGiftVoucher.Gift_Voucher_ExpiryDate =  angular.copy($scope.model.Gift.Gift_Voucher_ExpiryDate);
-		//	$scope.model.GiftVouchers.push(angular.copy(NewGiftVoucher));
+			NewGiftVoucher.Gift_Voucher_ExpiryDate =  angular.copy(vm.model.Gift.Gift_Voucher_ExpiryDate);
+		//	vm.model.GiftVouchers.push(angular.copy(NewGiftVoucher));
 			
 
-		  	if($scope.model.Gift.GV_id == undefined || $scope.model.Gift.GV_id == '' )
+		  	if(vm.model.Gift.GV_id == undefined || vm.model.Gift.GV_id == '' )
 		  	{
-		  			$scope.model.GiftVouchers.push(angular.copy(NewGiftVoucher));
+		  			vm.model.GiftVouchers.push(angular.copy(NewGiftVoucher));
 
 		  	}
 		  	else
 		  	{
-		  		for(var i = 0; i <= $scope.model.GiftVouchers.length -1 ;i++){
+		  		for(var i = 0; i <= vm.model.GiftVouchers.length -1 ;i++){
 					
-					if($scope.model.GiftVouchers[i].GV_id == $scope.model.Gift.GV_id)
+					if(vm.model.GiftVouchers[i].GV_id == vm.model.Gift.GV_id)
 					{
 						
 					}
-					//console.log($scope.model.det[1]);
+					//console.log(vm.model.det[1]);
 				}
 		  	}
 		 	
 		 	
-		 	$scope.DoCalculation();
-		 	$scope.$apply();
+		 	vm.DoCalculation();
+		 	vm.$apply();
  	 	 //	localStorage.setItem('BarcodeModel', JSON.stringify(NewItem));
-		 	//console.log($scope.model.det);
+		 	//console.log(vm.model.det);
 		  	toastr.success( data, "Status");
-	  	 	 //$scope.SearchBarcode($scope.model.Barcode_No);
+	  	 	 //vm.SearchBarcode(vm.model.Barcode_No);
          	setTimeout(function() { init(); }, 500);
         })
 
@@ -3733,41 +3114,41 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 	}
 
 
-	$scope.editGiftVoucher=function(v){
+	vm.editGiftVoucher=function(v){
 		console.log(v);	
-			$scope.model.Gift.Gift_Voucher_Type =  v.Gift_Voucher_Type;
-			$scope.model.Gift.Gift_Voucher_Amount =  v.Gift_Voucher_Amount;
-			$scope.model.Gift.Gift_Voucher_No =  v.Gift_Voucher_No;
-			$scope.model.Gift.Gift_Voucher_ExpiryDate =  v.Gift_Voucher_ExpiryDate;
+			vm.model.Gift.Gift_Voucher_Type =  v.Gift_Voucher_Type;
+			vm.model.Gift.Gift_Voucher_Amount =  v.Gift_Voucher_Amount;
+			vm.model.Gift.Gift_Voucher_No =  v.Gift_Voucher_No;
+			vm.model.Gift.Gift_Voucher_ExpiryDate =  v.Gift_Voucher_ExpiryDate;
 
 	}
 
-	$scope.ExchangeSalesDetail =function(temp){
+	vm.ExchangeSalesDetail =function(temp){
 
 		$.post(HttpUrl,{qry:temp,action:"ExchangeSalesDetail"},function(data){
         	     console.log(data);
 
-        	for(var i = 0; i <= $scope.model.det.length -1 ;i++){
+        	for(var i = 0; i <= vm.model.det.length -1 ;i++){
 					
-					if($scope.model.det[i].id_web == temp.id_web)
+					if(vm.model.det[i].id_web == temp.id_web)
 					{
-						$scope.model.det.splice(i,1);
-						console.log($scope.model.det[i]);		
+						vm.model.det.splice(i,1);
+						console.log(vm.model.det[i]);		
 					}
 					
 				}	
-			$scope.DoCalculation();
-		 	$scope.$apply();     
+			vm.DoCalculation();
+		 	vm.$apply();     
 		 	toastr.success( data, "Status");
 		  })
 
 	}
 
-	$scope.Save = function(){
-		localStorage.setItem('Bill_No', $scope.model.Bill_No);
-		if (confirm("Are you sure want to Save Bill No: " + $scope.model.Bill_No)){
-		$scope.model.saved = 1;
-        $.post(HttpUrl,{qry:$scope.model,action:"SaveSales_Book"},function(data){
+	vm.Save = function(){
+		localStorage.setItem('Bill_No', vm.model.Bill_No);
+		if (confirm("Are you sure want to Save Bill No: " + vm.model.Bill_No)){
+		vm.model.saved = 1;
+        $.post(HttpUrl,{qry:vm.model,action:"SaveSales_Book"},function(data){
          console.log(data);
           toastr.success( data, "Status");
          setTimeout(function() { init(); }, 500);
@@ -3775,30 +3156,30 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
     }
 		
 	}
-	$scope.SaveDet = function(){
-		$scope.tempModel.Barcode_No = $scope.model.Barcode_No;
-		console.log($scope.tempModel);
-        $.post(HttpUrl,{qry:$scope.tempModel,action:"XXXXXXX"},function(data){
+	vm.SaveDet = function(){
+		vm.tempModel.Barcode_No = vm.model.Barcode_No;
+		console.log(vm.tempModel);
+        $.post(HttpUrl,{qry:vm.tempModel,action:"XXXXXXX"},function(data){
          console.log(data);
           toastr.success( data, "Status");
-		  $scope.SearchBarcode($scope.model.Barcode_No);
+		  vm.SearchBarcode(vm.model.Barcode_No);
          setTimeout(function() { init(); }, 500);
         })
 	}
-	$scope.Delete = function(No){
-		if (confirm("Are you sure want to delete Bill No: " + $scope.model.Bill_No)){
-			$.post(HttpUrl,{qry:$scope.model.Bill_No,action:"DeleteSales"},function(data){
+	vm.Delete = function(No){
+		if (confirm("Are you sure want to delete Bill No: " + vm.model.Bill_No)){
+			$.post(HttpUrl,{qry:vm.model.Bill_No,action:"DeleteSales"},function(data){
          		console.log(data);
           		toastr.success( data, "Status");
-				$scope.New();
+				vm.New();
 	         	setTimeout(function() { init(); }, 500);
 		 
         	})
-        	$scope.New();
+        	vm.New();
 		}
 	 
 	}
-	$scope.DeleteDet = function(id){
+	vm.DeleteDet = function(id){
 		if (confirm("Are you sure want to delete item: " + id)){
 			$.post(HttpUrl,{qry:id,action:"DeleteDet"},function(data){
          	   console.log(data);
@@ -3807,35 +3188,35 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
         	})
 		}
 	}
-	$scope.EditDet = function(id){
-		$scope.tempModel = angular.copy($scope.model.det[id]);
-		console.log($scope.tempModel);
+	vm.EditDet = function(id){
+		vm.tempModel = angular.copy(vm.model.det[id]);
+		console.log(vm.tempModel);
 			}
-			$scope.AddPurchaseDet = function(){
-				$scope.tempModel = {};
-				//console.log($scope.tempModel);
+			vm.AddPurchaseDet = function(){
+				vm.tempModel = {};
+				//console.log(vm.tempModel);
 				
 			}
 
-	$scope.LoadInformation = function(model){
+	vm.LoadInformation = function(model){
 		
-		$scope.model = angular.copy(model.main[0]);
-	    $scope.model.det = angular.copy(model.det);
-		console.log($scope.model);
+		vm.model = angular.copy(model.main[0]);
+	    vm.model.det = angular.copy(model.det);
+		console.log(vm.model);
 	}
 			
-	$scope.SearchList = function(No_Look){
-		console.log($scope);
+	vm.SearchList = function(No_Look){
+		console.log(vm);
 		 HttpQry = "action=SearchListBill&qry=" + No_Look;
          API.call().then(function (response) {
 
                     try{
 						     console.log("----APICALL Details Json Data----");
 						     WebData = response;
-                             $scope.BillList =  WebData;
+                             vm.BillList =  WebData;
                              console.log("BILLLIST DATA");
-                             console.log($scope.BillList);
- 							localStorage.setItem('BillList', JSON.stringify($scope.BillList));
+                             console.log(vm.BillList);
+ 							localStorage.setItem('BillList', JSON.stringify(vm.BillList));
         
                         }catch(e){
                             console.log(e);
@@ -3846,7 +3227,7 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 		
 		
 	}
-	$scope.Search  = function(No_Look){
+	vm.Search  = function(No_Look){
 		console.log(No_Look);
 		if (No_Look == undefined) return;
 		localStorage.setItem('Bill_No', No_Look);
@@ -3856,12 +3237,12 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
                     try{
 						     console.log("----APICALL Details Json Data----");
 						     WebData = response;
-                             $scope.model =  WebData[0];
-                             $scope.model.det =  WebData.det;
-                             $scope.model.GiftVouchers =  WebData.GiftVouchers;
-						  console.log($scope.model);
-						  	 $scope.DoCalculation();	
-                             toastr.success( $scope.model.Barcode_No, "Status");
+                             vm.model =  WebData[0];
+                             vm.model.det =  WebData.det;
+                             vm.model.GiftVouchers =  WebData.GiftVouchers;
+						  console.log(vm.model);
+						  	 vm.DoCalculation();	
+                             toastr.success( vm.model.Barcode_No, "Status");
 
                         }catch(e){
                             console.log(e);
@@ -3872,33 +3253,27 @@ app.controller("BillController", ['$scope','API','$http','$compile','$location',
 		
 		
 	}
-	if ($scope.id == undefined) $scope.id = "";
+	if (vm.id == undefined) vm.id = "";
 
-     // $scope.open($scope.City,$scope.Category);
-   if ($scope.id != "" ) {
-	   	   $scope.model.Bill_No = $scope.id;
-		   $scope.Search($scope.model.Bill_No);
+     // vm.open(vm.City,vm.Category);
+   if (vm.id != "" ) {
+	   	   vm.model.Bill_No = vm.id;
+		   vm.Search(vm.model.Bill_No);
 	
 	   }
-	   else if ($scope.Bill_No_Look != ""  ){
-		   $scope.model.Bill_No = $scope.Bill_No_Look;
-		   if ($scope.model.Bill_No){
-		   		$scope.Search($scope.model.Bill_No);
+	   else if (vm.Bill_No_Look != ""  ){
+		   vm.model.Bill_No = vm.Bill_No_Look;
+		   if (vm.model.Bill_No){
+		   		vm.Search(vm.model.Bill_No);
 	   		}
 			else{
-		   		  $scope.New();	
+		   		  vm.New();	
 				
 			}
 	   }
 	   else {
-		   $scope.New();
+		   vm.New();
 	   }
-   
-
-}]);
-
-
-app.controller("BaseController", ['$scope','API','$http', function ($scope,API,$http) {
    
 
 }]);
@@ -3917,27 +3292,31 @@ function printContent(el){
 	document.body.innerHTML = restorepage;
 }
 var ChangeEvent = false;
-app.controller("LockController", ['$scope','API','$http','$compile','$timeout', function ($scope,API,$http,$compile,$timeout) {
+
+
+
+angular.module('app', [])
+.controller("LockController", ['API','$http','$compile','$timeout', function (API,$http,$compile,$timeout) {
 	HttpUrl = "Qry/billq.php";
+    var vm = this;
+	vm.UserName = "Bhupen";
     
-	$scope.UserName = "Bhupen";
-    
-	$scope.PassWord = "123";
-	$scope.disabled = true;
-	$scope.Unlock = function(){
-		if ($scope.PassWord == $scope.userpassword){
-			$scope.disabled = false;
+	vm.PassWord = "123";
+	vm.disabled = true;
+	vm.Unlock = function(){
+		if (vm.PassWord == vm.userpassword){
+			vm.disabled = false;
 		}
 		else
 		{
-			$scope.disabled = true;
+			vm.disabled = true;
 		}
 		
 	}
-	$scope.SendContact = function(){
+	vm.SendContact = function(){
 		HttpUrl = "Qry/q.php";
     
-        $.post(HttpUrl,{qry:$scope.model,action:"SendEnquiry"},function(data){
+        $.post(HttpUrl,{qry:vm.model,action:"SendEnquiry"},function(data){
           toastr.success( data, "Status");
 
   			window.location = "Bill.html";
@@ -3961,12 +3340,14 @@ Size_val: "",
 Tax_val: "",
 UOM: ""
 };
-app.controller("PurchaseController", ['$scope','API','$http','$compile', function ($scope,API,$http,$compile,$filter) {
+angular.module('app', [])
+.controller("PurchaseController", ['$scope','API','$http','$compile', function ($scope,API,$http,$compile,$filter) {
     $scope.City = params['city'];
     $scope.Category =  params['category'];
     $scope.Mobile = params['mobile'];
     $scope.Search = params['search'];
-	$scope.isDeveloperMode = true;
+	 $scope.isDeveloperMode = true;
+   alert("here")
 	if(window.location.toString().indexOf("file:") != -1)
 	{
 		$scope.isDeveloperMode  = true;
@@ -4069,7 +3450,7 @@ app.controller("PurchaseController", ['$scope','API','$http','$compile', functio
 	}
 
 	$scope.EditPurchaseDet = function(id){
-		$scope.tempModel = angular.copy($scope.model.det[id]);
+    $scope.tempModel = angular.copy($scope.model.det[id]);
 		console.log($scope.tempModel);
 			}
 			$scope.AddPurchaseDet = function(){
@@ -4268,7 +3649,8 @@ function printContent(el){
 	document.body.innerHTML = restorepage;
 }
 var ChangeEvent = false;
-app.controller("ReportController", ['$scope','API','$http','$compile','$location','$filter', function ($scope,API,$http,$compile,$location,$filter) {
+angular.module('app', [])
+.controller("ReportController", ['$scope','API','$http','$compile','$location','$filter', function ($scope,API,$http,$compile,$location,$filter) {
 	HttpUrl = "Qry/report.php";
     
 	$scope.isDeveloperMode = false;

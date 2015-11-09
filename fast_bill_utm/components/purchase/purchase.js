@@ -13,12 +13,14 @@ Size_val: "",
 Tax_val: "",
 UOM: ""
 };
-app.controller("PurchaseController", ['$scope','API','$http','$compile', function ($scope,API,$http,$compile,$filter) {
+angular.module('app', [])
+.controller("PurchaseController", ['$scope','API','$http','$compile', function ($scope,API,$http,$compile,$filter) {
     $scope.City = params['city'];
     $scope.Category =  params['category'];
     $scope.Mobile = params['mobile'];
     $scope.Search = params['search'];
-	$scope.isDeveloperMode = true;
+	 $scope.isDeveloperMode = true;
+   alert("here")
 	if(window.location.toString().indexOf("file:") != -1)
 	{
 		$scope.isDeveloperMode  = true;
@@ -121,7 +123,7 @@ app.controller("PurchaseController", ['$scope','API','$http','$compile', functio
 	}
 
 	$scope.EditPurchaseDet = function(id){
-		$scope.tempModel = angular.copy($scope.model.det[id]);
+    $scope.tempModel = angular.copy($scope.model.det[id]);
 		console.log($scope.tempModel);
 			}
 			$scope.AddPurchaseDet = function(){

@@ -11,27 +11,31 @@ function printContent(el){
 	document.body.innerHTML = restorepage;
 }
 var ChangeEvent = false;
-app.controller("LockController", ['$scope','API','$http','$compile','$timeout', function ($scope,API,$http,$compile,$timeout) {
+
+
+
+angular.module('app', [])
+.controller("LockController", ['API','$http','$compile','$timeout', function (API,$http,$compile,$timeout) {
 	HttpUrl = "Qry/billq.php";
+    var vm = this;
+	vm.UserName = "Bhupen";
     
-	$scope.UserName = "Bhupen";
-    
-	$scope.PassWord = "123";
-	$scope.disabled = true;
-	$scope.Unlock = function(){
-		if ($scope.PassWord == $scope.userpassword){
-			$scope.disabled = false;
+	vm.PassWord = "123";
+	vm.disabled = true;
+	vm.Unlock = function(){
+		if (vm.PassWord == vm.userpassword){
+			vm.disabled = false;
 		}
 		else
 		{
-			$scope.disabled = true;
+			vm.disabled = true;
 		}
 		
 	}
-	$scope.SendContact = function(){
+	vm.SendContact = function(){
 		HttpUrl = "Qry/q.php";
     
-        $.post(HttpUrl,{qry:$scope.model,action:"SendEnquiry"},function(data){
+        $.post(HttpUrl,{qry:vm.model,action:"SendEnquiry"},function(data){
           toastr.success( data, "Status");
 
   			window.location = "Bill.html";

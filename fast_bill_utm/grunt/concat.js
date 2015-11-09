@@ -31,6 +31,8 @@ module.exports = {
       'Assests/js/plugins/datapicker/bootstrap-datepicker.js',
       'Assests/js/plugins/gritter/jquery.gritter.min.js',
       'node_modules/angular/angular.min.js',
+      'node_modules/angular-new-router/dist/router.es5.min.js',
+      'index.js',
       'app.js',
       'Scripts/**/*.js',
       'Components/**/*.js',

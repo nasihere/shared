@@ -11,7 +11,8 @@ function printContent(el){
 	document.body.innerHTML = restorepage;
 }
 var ChangeEvent = false;
-app.controller("ReportController", ['$scope','API','$http','$compile','$location','$filter', function ($scope,API,$http,$compile,$location,$filter) {
+angular.module('app', [])
+.controller("ReportController", ['$scope','API','$http','$compile','$location','$filter', function ($scope,API,$http,$compile,$location,$filter) {
 	HttpUrl = "Qry/report.php";
     
 	$scope.isDeveloperMode = false;
