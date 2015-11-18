@@ -13,14 +13,13 @@ function printContent(el){
 var ChangeEvent = false;
 
 
-
 angular.module('app.lock', [])
-.controller("LockController", ['API','$http','$compile','$timeout', function (API,$http,$compile,$timeout) {
+.controller("LockController", function () {
 	HttpUrl = "Qry/billq.php";
     var vm = this;
 	vm.UserName = "Bhupen";
-    
-	vm.PassWord = "123";
+    vm.name = "Nasir Sayed Twsting";
+    	vm.PassWord = "123";
 	vm.disabled = true;
 	vm.Unlock = function(){
 		if (vm.PassWord == vm.userpassword){
@@ -41,5 +40,5 @@ angular.module('app.lock', [])
   			window.location = "Bill.html";
         });
 	}
-}]);
+});
 

@@ -2640,9 +2640,11 @@ function printContent(el){
 var ChangeEvent = false;
 
 angular.module('app.billing', [])
-.controller("BillingController", ['API','$http','$compile','$location','$anchorScroll', function (API,$http,$compile,$location,$anchorScroll) {
+.controller("BillingController", ['API','$compile','$location','$anchorScroll', function (API,$compile,$location,$anchorScroll) {
 	HttpUrl = "Qry/billq.php";
     var vm = this;
+
+	vm.running = true;
 	vm.isDeveloperMode = false;
 	if(window.location.toString().indexOf("file:") != -1)
 	{
@@ -2656,7 +2658,16 @@ angular.module('app.billing', [])
 	vm.btnCustOn = true;
 	vm.btnCCOn = true;
 	vm.btnFOCOn = true;
-	vm.id = params['id'];
+/*	if (params['id'] == undefined)
+	{
+		alert("Parameter ID is not defined");
+	}
+	else {
+		vm.id = params['id'];
+	
+	}
+	*/
+	vm.id = 1001;
 	vm.BillList = {};
 	 
 	vm.Bill_No_Look = window.localStorage.getItem("Bill_No");
@@ -3200,14 +3211,13 @@ function printContent(el){
 var ChangeEvent = false;
 
 
-
 angular.module('app.lock', [])
-.controller("LockController", ['API','$http','$compile','$timeout', function (API,$http,$compile,$timeout) {
+.controller("LockController", function () {
 	HttpUrl = "Qry/billq.php";
     var vm = this;
 	vm.UserName = "Bhupen";
-    
-	vm.PassWord = "123";
+    vm.name = "Nasir Sayed Twsting";
+    	vm.PassWord = "123";
 	vm.disabled = true;
 	vm.Unlock = function(){
 		if (vm.PassWord == vm.userpassword){
@@ -3228,7 +3238,7 @@ angular.module('app.lock', [])
   			window.location = "Bill.html";
         });
 	}
-}]);
+});
 
 
 var Root = {
@@ -3674,10 +3684,30 @@ angular.module('app.reports', [])
 
 
 angular.module('app', ['ngNewRouter','app.lock','app.billing','app.purchase','app.reports'])
-  .controller('AppController', ['$router', AppController]);
+  .controller('AppController', ['$router', AppController])
+  .factory('API', function($http) {
+
+    var myService = {
+        call: function() {
+                    console.log(HttpUrl +"?"+ HttpQry);
+                  var promise = $http.post(HttpUrl +"?"+ HttpQry).then(function (response) {
+                    console.log("API CALL() "+HttpQry);
+                    console.log(response);
+                    return response.data;
+                  });
+                  return promise;
+                },
+
+      };
+
+      return myService;
+
+    });
 
 AppController.$routeConfig = [
   { path: '/',           component: 'lock' },
+
+  { path: '/lock',           component: 'lock' },
   { path: '/billing',           component: 'billing' },
   { path: '/purchase',           component: 'purchase' },
   { path: '/reports',           component: 'reports' }
@@ -3687,24 +3717,5 @@ function AppController ($router) {}
 
 
 
-/*
 
 
-app.factory('API', function($http) {
-
-var myService = {
-    call: function() {
-                console.log(HttpUrl +"?"+ HttpQry);
-              var promise = $http.post(HttpUrl +"?"+ HttpQry).then(function (response) {
-                console.log("API CALL() "+HttpQry);
-                console.log(response);
-                return response.data;
-              });
-              return promise;
-            },
-
-  };
-
-  return myService;
-
-});*/

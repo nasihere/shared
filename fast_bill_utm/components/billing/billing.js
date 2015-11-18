@@ -16,9 +16,11 @@ function printContent(el){
 var ChangeEvent = false;
 
 angular.module('app.billing', [])
-.controller("BillingController", ['API','$http','$compile','$location','$anchorScroll', function (API,$http,$compile,$location,$anchorScroll) {
+.controller("BillingController", ['API','$compile','$location','$anchorScroll', function (API,$compile,$location,$anchorScroll) {
 	HttpUrl = "Qry/billq.php";
     var vm = this;
+
+	vm.running = true;
 	vm.isDeveloperMode = false;
 	if(window.location.toString().indexOf("file:") != -1)
 	{
@@ -32,7 +34,16 @@ angular.module('app.billing', [])
 	vm.btnCustOn = true;
 	vm.btnCCOn = true;
 	vm.btnFOCOn = true;
-	vm.id = params['id'];
+/*	if (params['id'] == undefined)
+	{
+		alert("Parameter ID is not defined");
+	}
+	else {
+		vm.id = params['id'];
+	
+	}
+	*/
+	vm.id = 1001;
 	vm.BillList = {};
 	 
 	vm.Bill_No_Look = window.localStorage.getItem("Bill_No");

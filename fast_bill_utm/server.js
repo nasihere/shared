@@ -5,7 +5,7 @@ http.createServer(function(req, res) {
 }).listen(port);
 */
 var port = process.env.PORT || 1337;
-
+console.log("port no: " + port);
 
 
 
