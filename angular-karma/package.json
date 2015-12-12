@@ -1,0 +1,29 @@
+{
+  "name": "angular-karma",
+  "version": "0.0.1",
+  "description": "Karma Angular Test Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nasihere/shared.git"
+  },
+  "keywords": [
+    "karma",
+    "angular"
+  ],
+  "author": "nasir saYED",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nasihere/shared/issues"
+  },
+  "homepage": "https://github.com/nasihere/shared#readme",
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.6"
+  }
+}
