@@ -1,8 +1,8 @@
 <div class="pull-left">
-					<h5>Bill <small></small>&nbsp;&nbsp;</h5>
-					<small ng-class="{'todo-completed':model.deleted == 1}"  data-toggle="modal" data-target="#myModelBillNo" class="  m-r-s"><i class="fa fa-clock-o"></i>  No: {{model.Bill_No}}</small>
-					<small ng-class="{'todo-completed':model.deleted == 1}"  data-toggle="modal" data-target="#myModelBillNo" class="  m-r-s"><i class="fa fa-calendar-o"></i> Date: {{model.Date}}</small>
-				</div>
+	<h5>Bill <small></small>&nbsp;&nbsp;</h5>
+	<small ng-class="{'todo-completed':billing.model.deleted == 1}"  data-toggle="modal" data-target="#myModelBillNo" class="  m-r-s"><i class="fa fa-clock-o"></i>  No: {{billing.model.Bill_No}}</small>
+	<small ng-class="{'todo-completed':billing.model.deleted == 1}"  data-toggle="modal" data-target="#myModelBillNo" class="  m-r-s"><i class="fa fa-calendar-o"></i> Date: {{billing.model.Date}}</small>
+</div>
 
 						<!--div class="ibox-tools">
 			<button class="btn btn-outline btn-danger no-margins-bottom dim" ng-class="{'btn-outline':!btnCCOn}"  ng-click="btnCCOn = !btnCCOn; OpenAllPanel = true;" type="button"><i class="fa fa-cc-visa"></i></button>

@@ -77,7 +77,7 @@
 		break;
 
         case 'ExchangeSalesDetail':
-	        $qSalesDet = "DELETE  FROM Sales_BookDet  where id_web = " . $_REQUEST['qry']['id_web'];
+	        $qSalesDet = "DELETE  FROM Sales_BookDet  where id_web = ".$_REQUEST['qry']['id_web'];
             $qSalesDet_1 = "UPDATE Purchase_Book  set Qty_In_Stock_val = Qty_In_Stock_val + '" . $_REQUEST['qry']['Qty_val'] . "' where Barcode_No =  '" . $_REQUEST['qry']['Barcode_No'] . "'";
             mysql_query($qSalesDet_1);
             $result_ = mysql_query($qSalesDet);

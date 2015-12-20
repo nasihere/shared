@@ -12,7 +12,6 @@ function printContent(el){
 }
 var ChangeEvent = false;
 
-
 angular.module('app.lock', [])
 .controller("LockController", function () {
 	HttpUrl = "Qry/billq.php";

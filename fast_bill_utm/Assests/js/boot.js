@@ -4,7 +4,7 @@ var init = function () {
 //Config
 
     // Config box
-
+  
     // Enable/disable fixed top navbar
     $('#fixednavbar').click(function () {
         if ($('#fixednavbar').is(':checked')) {

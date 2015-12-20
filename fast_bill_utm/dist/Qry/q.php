@@ -47,6 +47,7 @@ if ($_REQUEST['action'] == "") $_REQUEST['action']= "read";
 		        $qPurchaseDet = "select * from Purchase_BookDet where Barcode_No =  '" . $row['Barcode_No'] . "'";
 
 		        $result_ = mysql_query($qPurchaseDet);
+
 		        if (!$result) echo "No Data!!";
 
                     while($row_ = mysql_fetch_array($result_,MYSQL_ASSOC)) {
@@ -172,9 +173,10 @@ if ($_REQUEST['action'] == "") $_REQUEST['action']= "read";
 		break;
 
 		case "SavePurchase":
-   		    //print_r($_REQUEST);
-           // exit;
-   			 $names = "";
+   		    print_r($_REQUEST);
+
+
+         $names = "";
    			 $values = "";
 			 if (isset($_REQUEST['qry']['id_web']) && $_REQUEST['qry']['id_web'] != "" ){
    				 foreach($_REQUEST[qry] as $key => $val){
@@ -194,8 +196,9 @@ if ($_REQUEST['action'] == "") $_REQUEST['action']= "read";
    			 	$values = rtrim($values,",");
                 $InsertUpdateQryPurchaseDet = "Insert into Purchase_Book (id_web,datetime,$names) value (NULL,NOW(),$values)";
    			}
-            //echo $InsertUpdateQryPurchaseDet;
-			$result = mysql_query($InsertUpdateQryPurchaseDet);
+            echo $InsertUpdateQryPurchaseDet;
+            exit;
+            $result = mysql_query($InsertUpdateQryPurchaseDet);
    			if ($result == 1){
    			    echo "-Success-";
    			}

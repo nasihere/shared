@@ -1,6 +1,5 @@
-<div class="row ">
-
-</div>
+<div id="wrapper">
+ <div class="wrapper wrapper-content">
 <div class="row">
     <div class="col-md-7">
         <div class="ibox float-e-margins">
@@ -10,8 +9,8 @@
                    <h5>Purchase <small>Information</small></h5>
                </div>
                 <div class="pull-right " style="float:right">
-                <a class="btn no-padding btn-success" ng-click="NewBarcode()">&nbsp;&nbsp;&nbsp;Add New&nbsp;&nbsp;&nbsp;</a>
-                    <a class="btn btn-danger no-padding" ng-click="DeletePurchase(model.Barcode_No)">&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;</a>
+                <a class="btn no-padding btn-success" ng-click="purchase.NewBarcode()">&nbsp;&nbsp;&nbsp;Add New&nbsp;&nbsp;&nbsp;</a>
+                    <a class="btn btn-danger no-padding" ng-click="purchase.DeletePurchase(purchase.model.Barcode_No)">&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;</a>
                 </div>
             </div>
             <div class="ibox-content">
@@ -19,30 +18,30 @@
                     <div class="col-md-12">
                         <div class="form-group"><label class="col-lg-2 text-right control-label">Barcode No:</label>
 
-                            <div class="col-lg-10"><input type="text" ng-model="model.Barcode_No" placeholder="ABCXXXX" class="form-control"> <span class="help-block m-b-none">Example Use Barcode No to store inventory information.</span>
+                            <div class="col-lg-10"><input type="text" ng-model="purchase.model.Barcode_No" placeholder="ABCXXXX" class="form-control"> <span class="help-block m-b-none">Example Use Barcode No to store inventory information.</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="form-group"><label class="col-md-4 text-right no-padding control-label">Qty in Stock:</label>
+                        <div class="form-group"><label class="col-md-4 text-right no-padding control-label">Qty In Stock:</label>
 
-                            <div class="col-md-8"><input type="text"  ng-model="model.Qty_In_Stock_val" placeholder="0" class="form-control">
+                            <div class="col-md-8"><input type="text"  ng-model="purchase.model.Qty_In_Stock_val" placeholder="0" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group"><label class="col-md-4 text-right no-padding control-label">MRP:</label>
 
-                            <div class="col-md-8"><input type="text"   ng-model="model.MRP_val" placeholder="0" class="form-control">
+                            <div class="col-md-8"><input type="text"   ng-model="purchase.model.MRP_val" placeholder="0" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group"><label class="col-md-4 text-right no-padding control-label">Quality:</label>
 
-                            <div class="col-md-8"><input type="text" ng-model="model.QualityNo" placeholder="0" class="form-control">
+                            <div class="col-md-8"><input type="text" ng-model="purchase.model.QualityNo" placeholder="0" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -51,7 +50,7 @@
                     <div class="col-md-4">
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label">Default Size:</label>
 
-                            <div class="col-md-8"><input type="text" ng-model="model.Default_Size_val" placeholder="0" class="form-control">
+                            <div class="col-md-8"><input type="text" ng-model="purchase.model.Default_Size_val" placeholder="0" class="form-control">
                                 <span class="help-block m-b-none"></span>
                             </div>
                         </div>
@@ -59,7 +58,7 @@
                     <div class="col-md-4">
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label">Pcs Len:</label>
 
-                            <div class="col-md-8"><input type="text"  ng-model="model.Pcs_Length_val" placeholder="0" class="form-control">
+                            <div class="col-md-8"><input type="text"  ng-model="purchase.model.Pcs_Length_val" placeholder="0" class="form-control">
                                 <span class="help-block m-b-none"></span>
                             </div>
                         </div>
@@ -67,7 +66,7 @@
                     <div class="col-md-4">
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label">Size:</label>
 
-                            <div class="col-md-8"><input type="text" ng-model="model.Size_val" placeholder="0" class="form-control">
+                            <div class="col-md-8"><input type="text" ng-model="purchase.model.Size_val" placeholder="0" class="form-control">
                                 <span class="help-block m-b-none"></span>
                             </div>
                         </div>
@@ -79,7 +78,7 @@
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label">Product:</label>
 
                             <div class="col-md-8">
-                                <select class="form-control m-b" ng-change="changeProductType()" ng-model="model.Product_Type" name="account">
+                                <select class="form-control m-b" ng-change="purchase.changeProductType()" ng-model="purchase.model.Product_Type" name="account">
                                     <option>Suiting</option>
                                     <option>Fabric</option>
 									<option>Apparel Shirt</option>
@@ -93,7 +92,7 @@
                     <div class="col-md-4">
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label">Tax %:</label>
 
-                            <div class="col-md-8"><input type="text"  ng-model="model.Tax_val" placeholder="0" class="form-control">
+                            <div class="col-md-8"><input type="text"  ng-model="purchase.model.Tax_val" placeholder="0" class="form-control">
                                 <span class="help-block m-b-none"></span>
                             </div>
                         </div>
@@ -102,7 +101,7 @@
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label">Category:</label>
 
                             <div class="col-md-8">
-                                <select class="form-control m-b"  ng-model="model.Category" name="account">
+                                <select class="form-control m-b"  ng-model="purchase.model.Category" name="account">
                                     <option selected="selected">Fresh</option>
                                     <option>Old</option>
                                     <option>Used</option>
@@ -119,7 +118,7 @@
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label">U.O.M:</label>
 
                             <div class="col-md-8">
-                                <select class="form-control m-b" ng-model="model.UOM" name="account">
+                                <select class="form-control m-b" ng-model="purchase.model.UOM" name="account">
                                     <option>Pcs</option>
                                     <option>Meter</option>
                                     <option>Ft</option>
@@ -133,7 +132,7 @@
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label">Sales Tax:</label>
 
                             <div class="col-md-8">
-                                <select class="form-control m-b" ng-model="model.Sales_Tax" name="account">
+                                <select class="form-control m-b" ng-model="purchase.model.Sales_Tax" name="account">
                                     <option>Applicable</option>
                                     <option>Not Applicable</option>
                                     <option>Other</option>
@@ -146,7 +145,7 @@
                         <div class="form-group"><label class="col-md-4 text-right no-padding  control-label"></label>
 
                             <div class="col-md-8">
-                                <button class="btn btn-success" ng-click="SavePurchase()">Save</button>
+                                <button class="btn btn-success" ng-click="purchase.SavePurchase()">Save</button>
                                 <span class="help-block m-b-none"></span>
                             </div>
                         </div>
@@ -170,8 +169,8 @@
                     <div class="form-group"><label class="col-sm-2 control-label">Search By <small>Barcode No</small></label>
 
                         <div class="col-sm-10">
-                            <div class="input-group"><input type="text" ng-model="Barcode_No_Look" class="form-control"> <span class="input-group-btn">
-                            <button type="button" ng-click="SimilarBarcode(Barcode_No_Look)" class="btn btn-primary">Go!</button> </span></div>
+                            <div class="input-group"><input type="text" ng-model="purchase.Barcode_No_Look" class="form-control"> <span class="input-group-btn">
+                            <button type="button" ng-click="purchase.SimilarBarcode(purchase.Barcode_No_Look)" class="btn btn-primary">Go!</button> </span></div>
                         </div>
                     </div>
 						
@@ -191,12 +190,12 @@
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                    <tr ng-repeat="item in BarcodeList">
-	                        <td><a href="#" ng-click="LoadBarcodeInformation(item)">{{item.main[0].Barcode_No}}</a></td>
-	                        <td>{{item.main[0].Qty_In_Stock_val}}</td>
-	                        <td>{{item.main[0].MRP_val}}</td>
-	                        <td class="text-navy"> <i class="fa fa-level-up"></i> {{item.det.length}}</td>
-	                        <td>{{item.main[0].datetime}}</td>
+	                    <tr ng-repeat="items in purchase.BarcodeList">
+	                        <td><a href="#" ng-click="purchase.LoadBarcodeInformation(item)">{{items.main[0].Barcode_No}}</a></td>
+	                        <td>{{items.main[0].Qty_In_Stock_val}}</td>
+	                        <td>{{items.main[0].MRP_val}}</td>
+	                        <td class="text-navy"> <i class="fa fa-level-up"></i> {{items.det.length}}</td>
+	                        <td>{{items.main[0].datetime}}</td>
 	                    </tr>
                  
 
@@ -219,7 +218,7 @@
                     <h5>Puchase <small>History</small></h5>
                 </div>
                 <div class="pull-right " style="float:right">
-                    <a class="btn btn-info no-padding" data-toggle="modal" ng-click="AddPurchaseDet()" data-target="#myModal">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;</a>
+                    <a class="btn btn-info no-padding" data-toggle="modal" ng-click="purchase.AddPurchaseDet()" data-target="#myModal">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;</a>
 				</div>
             </div>
 
@@ -242,7 +241,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="item in model.det">
+                    <tr ng-repeat="item in purchase.model.det">
                         <td>{{item.Barcode_No}}</td>
                         <td>{{item.Party_Name}}</td>
                         <td>{{item.Bill_Date}}</td>
@@ -253,7 +252,7 @@
                         <td>{{item.T_Amount_val}}</td>
                         <td>{{item.Discount}}</td>
                         <td>{{item.Narration}}</td>
-                        <td><a href="" class="btn btn-warning" ng-click="EditPurchaseDet($index);" data-toggle="modal" data-target="#myModal">E</a> <small>|</small> <a href="" class="btn btn-danger" ng-click="DeletePurchaseDet(item.id_web)">X</a></td>
+                        <td><a href="" class="btn btn-warning" ng-click="purchase.EditPurchaseDet($index);" data-toggle="modal" data-target="#myModal">E</a> <small>|</small> <a href="" class="btn btn-danger" ng-click="purchase.DeletePurchaseDet(item.id_web)">X</a></td>
                     </tr>
                  
 
@@ -264,10 +263,10 @@
     </div>
 </div>
 
-<div ng-show="isDeveloperMode">
-<pre>{{model | json}}</pre>
-<pre>{{tempModel | json}}</pre>
-<pre>{{BarcodeList | json}}</pre>
+<div ng-show="purchase.isDeveloperMode">
+<pre>{{purchase.model | json}}</pre>
+<pre>{{purchase.tempModel | json}}</pre>
+<pre>{{purchase.BarcodeList | json}}</pre>
 </div>
 
 <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="false" >
@@ -277,34 +276,36 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                         <i class="fa fa-laptop modal-icon"></i>
-						  <h4 class="modal-title">Barcode: {{model.Barcode_No}}</h4>
-                            <small class="font-bold">Category: {{model.Category}} - MRP: {{model.MRP_val}} - Pcs {{model.Pcs_Length_val}} - Product Type: {{mode.Product_Type}} - U.O.M: {{item.UOM}}</small>
+						  <h4 class="modal-title">Barcode: {{purchase.model.Barcode_No}}</h4>
+                            <small class="font-bold">Category: {{purchase.model.Category}} - MRP: {{purchase.model.MRP_val}} - Pcs {{purchase.model.Pcs_Length_val}} - Product Type: {{purchase.mode.Product_Type}} - U.O.M: {{item.UOM}}</small>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group hide"><label>Party Name{{isDeveloperMode}}</label> <input ng-model="tempModel.Barcode_No" ng-init="tempModel.Barcode_No = model.Barcode_No" type="text"   class="form-control">
+                    <div class="form-group hide"><label>Party Name{{purchase.isDeveloperMode}}</label> <input ng-model="purchase.tempModel.Barcode_No" ng-init="purchase.tempModel.Barcode_No = purchase.model.Barcode_No" type="text"   class="form-control">
                     </div>
                     <div class="form-group" style="position:relative"><label>Party Name</label> 
-                    <input ng-model="tempModel.Party_Name" type="text" value="{{select  }}"   class="form-control" ng-keypress="openDiv()" ng-keyup="openDiv()" ng-keydown="openDiv()" >
+                    <input ng-model="purchase.tempModel.Party_Name" type="text" value="{{purchase.select }}"   class="form-control" ng-keypress="purchase.openDiv()" ng-keyup="purchase.openDiv()" ng-keydown="purchase.openDiv()" >
                      <ul class="dropdown-menu"  id="dropdown-menu" ng-style="{display: displayStyle}">
-                            <li ng-repeat="partyName in partyNames | filter:tempModel.Party_Name " ng-click="selected(partyName)" >{{partyName}}</li>
+                            <li ng-repeat="partyName in purchase.partyNames | filter:purchase.tempModel.Party_Name " ng-click="purchase.selected(partyName)" >{{partyName}}</li>
                     
                     </ul>
                     </div>
-                   <div class="form-group"><label>Bill Date</label> <input ng-model="tempModel.Bill_Date | date:'dd/MM/yyyy'" type="text" placeholder="DD/MM/YYYY" class="form-control datecomp"></div>
-                    <div class="form-group"><label>Bill No</label> <input ng-model="tempModel.Bill_No_val" type="number"  class="form-control"></div>
-                    <div class="form-group"><label>Size</label> <input type="text" ng-model="tempModel.Size" class="form-control"></div>
+                   <div class="form-group"><label>Bill Date</label> <input ng-model="purchase.tempModel.Bill_Date" type="text" placeholder="DD/MM/YYYY" class="form-control datecomp"></div>
+                    <div class="form-group"><label>Bill No</label> <input ng-model="purchase.tempModel.Bill_No_val" type="number"  class="form-control"></div>
+                    <div class="form-group"><label>Size</label> <input type="text" ng-model="purchase.tempModel.Size" class="form-control"></div>
                     <div class="form-group"><label>Qty</label> 
-                    <input type="price" ng-model="tempModel.Qty_val" class="form-control" ng-keypress="doCalculation()" ng-keyup="doCalculation()" ng-keydown="doCalculation()"></div>
+                    <input type="price" ng-model="purchase.tempModel.Qty_val" class="form-control" ng-keypress="purchase.doCalculation()" ng-keyup="purchase.doCalculation()" ng-keydown="purchase.doCalculation()"></div>
                     <div class="form-group"><label>Cost Per Pcs</label> 
-                    <input type="number" ng-model="tempModel.Cost_Price_val" class="form-control" ng-keypress="doCalculation()" ng-keyup="doCalculation()" ng-keydown="doCalculation()"></div>
-                    <div class="form-group"><label>Total Amount</label> <input type="number" ng-model="tempModel.T_Amount_val" class="form-control" readonly></div>
-                    <div class="form-group"><label>Discount</label> <input type="number" ng-model="tempModel.Discount" class="form-control"></div>
-                    <div class="form-group"><label>Case No</label> <input type="text" ng-model="tempModel.Narration" class="form-control"></div>
+                    <input type="number" ng-model="purchase.tempModel.Cost_Price_val" class="form-control" ng-keypress="purchase.doCalculation()" ng-keyup="purchase.doCalculation()" ng-keydown="purchase.doCalculation()"></div>
+                    <div class="form-group"><label>Total Amount</label> <input type="number" ng-model="purchase.tempModel.T_Amount_val" class="form-control" readonly></div>
+                    <div class="form-group"><label>Discount</label> <input type="number" ng-model="purchase.tempModel.Discount" class="form-control"></div>
+                    <div class="form-group"><label>Case No</label> <input type="text" ng-model="purchase.tempModel.Narration" class="form-control"></div>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <button type="button" ng-click="SavePurchaseDet(tempModel)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+                    <button type="button" ng-click="purchase.SavePurchaseDet(purchase.tempModel)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
                     </div>
             </div>
         </div>
+</div>
+</div>
 </div>

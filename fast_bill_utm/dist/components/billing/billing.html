@@ -26,12 +26,11 @@
 				        <div ng-include src="'components/billing/Bill/BillTable.html'"></div>
 					</div>
 			</div>
-	</div>
-	<pre>{{billing.running}}</pre>
+	</div>	
 	<div ng-show="billing.isDeveloperMode">
-		<pre>{{billing.model | json}}</pre>
-		<pre>{{billing.tempModel | json}}</pre>
-		<pre>{{billing.BarcodeList | json}}</pre>
+		<pre>{{ billing.model | json}}</pre>
+		<pre>{{ billing.tempModel | json}}</pre>
+		<pre>{{ billing.BarcodeList | json}}</pre>
 	</div>
 
 	<div ng-include src="'components/billing/Bill/BillNoSearch.html'"></div>

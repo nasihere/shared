@@ -19,9 +19,9 @@ angular.module('app.billing', [])
 .controller("BillingController", ['API','$compile','$location','$anchorScroll', function (API,$compile,$location,$anchorScroll) {
 	HttpUrl = "Qry/billq.php";
     var vm = this;
-
+    vm.isDisabled = true;
 	vm.running = true;
-	vm.isDeveloperMode = false;
+	vm.isDeveloperMode = true;
 	if(window.location.toString().indexOf("file:") != -1)
 	{
 		vm.isDeveloperMode  = true;
@@ -43,7 +43,7 @@ angular.module('app.billing', [])
 	
 	}
 	*/
-	vm.id = 1001;
+	//vm.id = 1001;
 	vm.BillList = {};
 	 
 	vm.Bill_No_Look = window.localStorage.getItem("Bill_No");
@@ -335,7 +335,6 @@ angular.module('app.billing', [])
 		 	
 		 	
 		 	vm.DoCalculation();
-		 	vm.$apply();
  	 	 	localStorage.setItem('BarcodeModel', JSON.stringify(NewItem));
 		 	//console.log(vm.model.det);
 		  	toastr.success( data, "Status");
@@ -345,7 +344,6 @@ angular.module('app.billing', [])
 	}
 
 	vm.editItem=function(item){
-		console.log(item);
 		vm.tempModel.Barcode_No = item.Barcode_No;
 		vm.tempModel.Qty_val = item.Qty_val;
 		vm.tempModel.MRP_val = item.MRP_val;
@@ -395,7 +393,7 @@ angular.module('app.billing', [])
 		 	
 		 	
 		 	vm.DoCalculation();
-		 	vm.$apply();
+		 	//vm.$apply();
  	 	 //	localStorage.setItem('BarcodeModel', JSON.stringify(NewItem));
 		 	//console.log(vm.model.det);
 		  	toastr.success( data, "Status");
@@ -430,11 +428,10 @@ angular.module('app.billing', [])
 					}
 					
 				}	
-			vm.DoCalculation();
-		 	vm.$apply();     
+			vm.DoCalculation();   
 		 	toastr.success( data, "Status");
-		  })
-
+		  });
+vm.isDisabled = true; 
 	}
 
 	vm.Save = function(){

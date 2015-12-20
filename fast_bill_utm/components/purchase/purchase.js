@@ -1,4 +1,4 @@
-﻿var Root = {
+var Root = {
 Barcode_No: "",
 Category: "",
 DET_STOCK_QTY: "",
@@ -13,106 +13,108 @@ Size_val: "",
 Tax_val: "",
 UOM: ""
 };
-angular.module('app.purchase', [])
-.controller("PurchaseController", ['$scope','API','$http','$compile', function ($scope,API,$http,$compile,$filter) {
-    $scope.City = params['city'];
-    $scope.Category =  params['category'];
-    $scope.Mobile = params['mobile'];
-    $scope.Search = params['search'];
-	 $scope.isDeveloperMode = true;
-   alert("here")
+
+angular.module('app.purchase',[])
+.controller("PurchaseController", ['API','$http','$compile', function (API,$http,$compile) {
+   
+  var HttpUrl = "Qry/q.php";
+ 
+
+  var vm = this;
+  vm.model ="";
+  vm.isDeveloperMode = true;
 	if(window.location.toString().indexOf("file:") != -1)
 	{
-		$scope.isDeveloperMode  = true;
+		vm.isDeveloperMode  = true;
 	}
-    $scope.Page = "Details";
-    if ($scope.City == undefined && $scope.Category == undefined){
-        $scope.City = "Mumbra";
-        $scope.Category = "Classes";
+    vm.Page = "Details";
+    if (vm.City == undefined && vm.Category == undefined){
+        vm.City = "Mumbra";
+        vm.Category = "Classes";
     }
-    $scope.webdata = "";
-    $scope.webHtml = "nasir";
-    $scope.id = params['id'];
-	  $scope.BarcodeList = {};
-    $scope.Barcode_No_Look = window.localStorage.getItem("Barcode_No");
+    vm.webdata = "";
+    vm.webHtml = "nasir";
+    //vm.id = params['id'];
+	  vm.BarcodeList = {};
+    vm.Barcode_No_Look = window.localStorage.getItem("Barcode_No");
     var LoadData = window.localStorage.getItem("BarcodeList");
     if (LoadData != null){
-	 	$scope.BarcodeList = JSON.parse(LoadData);
-		  console.log($scope.BarcodeList);
+	 	vm.BarcodeList = JSON.parse(LoadData);
+		  console.log(vm.BarcodeList);
  	  }
-    $scope.model = Root;
+    vm.model = Root;
     	
-    $scope.tempModel = {};
-    $scope.bind = function(){
+    vm.tempModel = {};
+    vm.bind = function(){
         $("[contenteditable=true]").removeAttr("contenteditable");
 
     }
 
-    $scope.NewBarcode = function(){
-		$scope.model = Root;
-		$scope.model.Barcode_No = "";
+    vm.NewBarcode = function(){
+		vm.model = Root;
+		vm.model.Barcode_No = "";
 	}
 
-  $scope.openDiv = function()
+  vm.openDiv = function()
   {
-    $scope.displayStyle = 'block';
+    vm.displayStyle = 'block';
     console.log('hello');
   }
 
-  $scope.selected = function(v)
+  vm.selected = function(v)
   {
-    $scope.tempModel.Party_Name = v;
-     $scope.displayStyle = 'none';
+    vm.tempModel.Party_Name = v;
+     vm.displayStyle = 'none';
   }
 
-  $scope.doCalculation = function()
+  vm.doCalculation = function()
   {
-        var qty = $scope.tempModel.Qty_val;
-        var cost_price = $scope.tempModel.Cost_Price_val;
-        $scope.tempModel.T_Amount_val = '';
+        var qty = vm.tempModel.Qty_val;
+        var cost_price = vm.tempModel.Cost_Price_val;
+        vm.tempModel.T_Amount_val = '';
       console.log(qty);
       console.log(cost_price);
       if(( qty != undefined || qty != '') && ( cost_price != undefined || cost_price != ''))
       {
-        $scope.tempModel.T_Amount_val = qty * cost_price; 
+        vm.tempModel.T_Amount_val = qty * cost_price; 
       }
 
   }
 
-
-	$scope.SavePurchase = function(){
-		
-  $.post(HttpUrl,{qry:$scope.model,action:"SavePurchase"},function(data){
+	vm.SavePurchase = function(){
+		console.log(HttpUrl);
+    console.log(vm.model);
+  $.post(HttpUrl,{qry:vm.model,action:"SavePurchase"},function(data){
       console.log(data);
       toastr.success( data, "Status");
       setTimeout(function() { init(); }, 500);
     })
 	}
 
-	$scope.SavePurchaseDet = function(){
-		$scope.tempModel.Barcode_No = $scope.model.Barcode_No;
-		console.log($scope.tempModel);
-    $.post(HttpUrl,{qry:$scope.tempModel,action:"SavePurchaseDet"},function(data){
+	vm.SavePurchaseDet = function(){
+		vm.tempModel.Barcode_No = vm.model.Barcode_No;
+		console.log(vm.tempModel);
+    $.post(HttpUrl,{qry:vm.tempModel,action:"SavePurchaseDet"},function(data){
       console.log(data);
       toastr.success( data, "Status");
 		  
-      $scope.SearchBarcode($scope.model.Barcode_No);
+      vm.SearchBarcode(vm.model.Barcode_No);
          setTimeout(function() { init(); }, 500);
         })
 	}
 
-	$scope.DeletePurchase = function(Barcode_No){
+	vm.DeletePurchase = function(Barcode_No){
 		if (confirm("Are you sure want to delete Barcode No: " + Barcode_No)){
 			$.post(HttpUrl,{qry:Barcode_No,action:"DeletePurchase"},function(data){
          		console.log(data);
           		toastr.success( data, "Status");
 	         	setTimeout(function() { init(); }, 500);	 
         	})
-        	$scope.NewBarcode();
+        	vm.NewBarcode();
 		}
 	}
 
-	$scope.DeletePurchaseDet = function(id){
+	vm.DeletePurchaseDet = function(id){
 		if (confirm("Are you sure want to delete id: " + id)){
 			$.post(HttpUrl,{qry:id,action:"DeletePurchaseDet"},function(data){
          	   console.log(data);
@@ -122,63 +124,65 @@ angular.module('app.purchase', [])
 		}
 	}
 
-	$scope.EditPurchaseDet = function(id){
-    $scope.tempModel = angular.copy($scope.model.det[id]);
-		console.log($scope.tempModel);
+	vm.EditPurchaseDet = function(id){
+    vm.tempModel = angular.copy(vm.model.det[id]);
+		console.log(vm.tempModel);
 			}
-			$scope.AddPurchaseDet = function(){
-				$scope.tempModel = {};
+			vm.AddPurchaseDet = function(){
+				vm.tempModel = {};
         
-				$scope.tempModel.Bill_Date = new Date();
+				//vm.tempModel.Bill_Date = new Date();
 
-        $scope.tempModel.Size = $scope.model.Size_val;
-        $scope.getPartyname();
+        vm.tempModel.Size = vm.model.Size_val;
+        vm.getPartyname();
 	}
 
-  $scope.changeProductType = function(){
+  vm.changeProductType = function(){
     console.log('Hello');
-      if($scope.model.Product_Type == 'Apparel Shirt')
+      if(vm.model.Product_Type == 'Apparel Shirt')
       {
-            $scope.model.UOM = 'Pcs';
-            $scope.model.Sales_Tax = 'Applicable';
-            $scope.model.Default_Size_val = 1;     
-            $scope.model.Tax_val = 5;
+            vm.model.UOM = 'Pcs';
+            vm.model.Sales_Tax = 'Applicable';
+            vm.model.Default_Size_val = 1;     
+            vm.model.Tax_val = 5;
       }
-      else if ($scope.model.Product_Type == 'Suiting')
+      else if (vm.model.Product_Type == 'Suiting')
       {
-            $scope.model.UOM = 'Meter';
-            $scope.model.Sales_Tax = 'Not Applicable';
-            $scope.model.Default_Size_val = 1.2;
-            $scope.model.Tax_val = 0;
+            vm.model.UOM = 'Meter';
+            vm.model.Sales_Tax = 'Not Applicable';
+            vm.model.Default_Size_val = 1.2;
+            vm.model.Tax_val = 0;
       }
       else
       {
-            $scope.model.UOM = '';
-            $scope.model.Sales_Tax = '';
-            $scope.model.Default_Size_val = ''; 
-            $scope.model.Tax_val = 0;
+            vm.model.UOM = '';
+            vm.model.Sales_Tax = '';
+            vm.model.Default_Size_val = ''; 
+            vm.model.Tax_val = 0;
       }
   }
 
-	$scope.LoadBarcodeInformation = function(model){
+	vm.LoadBarcodeInformation = function(model){
 
-      $scope.model = angular.copy(model.main[0]);
-	    $scope.model.det = angular.copy(model.det);
-      console.log($scope.model);
+      vm.model = angular.copy(model.main[0]);
+	    vm.model.det = angular.copy(model.det);
+      console.log(vm.model);
 	}
 			
-	$scope.SimilarBarcode = function(Barcode_No_Look){
+	vm.SimilarBarcode = function(Barcode_No_Look){
       HttpQry = "action=SearchBarcode&qry=" + Barcode_No_Look;
 	    localStorage.setItem('Barcode_No', Barcode_No_Look);
+      console.log(HttpQry);
       API.call().then(function (response) {
 
                    try{
                             console.log("----APICALL Details Json Data----");
-					        WebData = response;
-                            $scope.BarcodeList =  WebData;
-							localStorage.setItem('BarcodeList', JSON.stringify($scope.BarcodeList));
-                            console.log($scope.model);
-                            toastr.success($scope.model.Barcode_No, "Status");
+					       console.log(response);
+                  WebData = response;
+                            vm.BarcodeList =  WebData;
+							localStorage.setItem('BarcodeList', JSON.stringify(vm.BarcodeList));
+                            //  console.log(vm.model);
+                            toastr.success(vm.model.Barcode_No, "Status");
 
                        }catch(e){
                            console.log(e);
@@ -188,7 +192,7 @@ angular.module('app.purchase', [])
                 });
 	}
 
-	$scope.SearchBarcode = function(Barcode_No_Look){
+	vm.SearchBarcode = function(Barcode_No_Look){
 		console.log($scope);
 		localStorage.setItem('Barcode_No', Barcode_No_Look);
 	     HttpQry = "action=GetBarcode&qry=cols Barcode_No = '" + Barcode_No_Look +"'";
@@ -197,10 +201,10 @@ angular.module('app.purchase', [])
                     try{
                              console.log("----APICALL Details Json Data----");
 						     WebData = response;
-                             $scope.model =  WebData.main[0];
-                             $scope.model.det =  WebData.det;
-                             console.log($scope.model);
-                             toastr.success( $scope.model.Barcode_No, "Status");
+                             vm.model =  WebData.main[0];
+                             vm.model.det =  WebData.det;
+                             console.log(vm.model);
+                             toastr.success( vm.model.Barcode_No, "Status");
 
                         }catch(e){
                             console.log(e);
@@ -212,13 +216,13 @@ angular.module('app.purchase', [])
 		
 	}
 
-  $scope.getPartyname=function(){
+  vm.getPartyname=function(){
       HttpQry = "action=getPartyname";
          API.call().then(function (response) {
 
                     try{
                              console.log("----APICALL Details Json Data----");
-                             $scope.partyNames =response;
+                             vm.partyNames =response;
                              console.log(response);
                              
 
@@ -233,10 +237,10 @@ angular.module('app.purchase', [])
    
 
 
-   $scope.open = function(city,category){
-       $scope.City = city;
-       $scope.Category =  category;
-        if ($scope.id == undefined){
+   vm.open = function(city,category){
+       vm.City = city;
+       vm.Category =  category;
+        if (vm.id == undefined){
            HttpQry = "action=web&qry=cols  categoy = '"+city + "|" + category+"'";
 
       }
@@ -262,15 +266,15 @@ angular.module('app.purchase', [])
                       tElement.append(el);
                       compiled = $compile(el);
              //           $(".dn").remove();
-                    HttpQry = "action=web&qry=cols id_web = "+$scope.id;
+                    HttpQry = "action=web&qry=cols id_web = "+vm.id;
                      API.call().then(function (response) {
 
                                 try{
                                          console.log("----APICALL Details Json Data----");
                                          WebData = response;
-                                         $scope.model =  WebData;
+                                         vm.model =  WebData;
 										 
-                                         console.log($scope.webdata);
+                                         console.log(vm.webdata);
                                          toastr.success( response.length, "Status");
 
                                     }catch(e){
@@ -282,8 +286,8 @@ angular.module('app.purchase', [])
 
 
                       compiled($scope);
-                      $scope.$digest();
-                      $scope.bind();
+                      vm.$digest();
+                      vm.bind();
 
                   }catch(e){
                       console.log(e);
@@ -294,15 +298,15 @@ angular.module('app.purchase', [])
         });
 
     }
-   // $scope.open($scope.City,$scope.Category);
-   if ($scope.Barcode_No == "") {
-	   $scope.NewBarcode();
+   // vm.open(vm.City,vm.Category);
+   if (vm.Barcode_No == "") {
+	   vm.NewBarcode();
 	
    }
    else
    {
-	   $scope.model.Barcode_No = $scope.Barcode_No;
-	 //  $scope.SimilarBarcode();
+	   vm.model.Barcode_No = vm.Barcode_No;
+	 //  vm.SimilarBarcode();
 	
    }
 

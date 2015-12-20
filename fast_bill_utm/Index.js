@@ -1,3 +1,4 @@
+var HttpUrl = "Qry/report.php";
 angular.module('app', ['ngNewRouter','app.lock','app.billing','app.purchase','app.reports'])
   .controller('AppController', ['$router', AppController])
   .factory('API', function($http) {
