@@ -1,0 +1,259 @@
+{
+  "name": "PurchaseBook",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mysql": {
+    "schema": "showroom",
+    "table": "purchase_book"
+  },
+  "properties": {
+    "barcodeNo": {
+      "type": "String",
+      "required": true,
+      "length": 25,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "Barcode_No",
+        "dataType": "varchar",
+        "dataLength": 25,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      },
+      "_selectable": false
+    },
+    "idWeb": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "id_web",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      },
+      "_selectable": false
+    },
+    "qtyInStockVal": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "Qty_In_Stock_val",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "mrpVal": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "MRP_val",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "defaultSizeVal": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "Default_Size_val",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "pcsLengthVal": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "Pcs_Length_val",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "uom": {
+      "type": "String",
+      "required": false,
+      "length": 35,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "UOM",
+        "dataType": "varchar",
+        "dataLength": 35,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "productType": {
+      "type": "String",
+      "required": false,
+      "length": 125,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "Product_Type",
+        "dataType": "varchar",
+        "dataLength": 125,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "category": {
+      "type": "String",
+      "required": false,
+      "length": 35,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "Category",
+        "dataType": "varchar",
+        "dataLength": 35,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "salesTax": {
+      "type": "String",
+      "required": false,
+      "length": 125,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "Sales_Tax",
+        "dataType": "varchar",
+        "dataLength": 125,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "taxVal": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "Tax_val",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "sizeVal": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "Size_val",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "qualityno": {
+      "type": "String",
+      "required": false,
+      "length": 50,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "QualityNo",
+        "dataType": "varchar",
+        "dataLength": 50,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "detStockQty": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "DET_STOCK_QTY",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "datetime": {
+      "type": "Date",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "datetime",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      },
+      "_selectable": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

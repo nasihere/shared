@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "GiftVoucher": {
+    "dataSource": "mysql_local_fastbill",
+    "public": true
+  },
+  "PurchaseBook": {
+    "dataSource": "mysql_local_fastbill",
+    "public": true
+  },
+  "PurchaseBookdet": {
+    "dataSource": "mysql_local_fastbill",
+    "public": true
+  },
+  "SalesBook": {
+    "dataSource": "mysql_local_fastbill",
+    "public": true
+  },
+  "SalesBookdet": {
+    "dataSource": "mysql_local_fastbill",
+    "public": true
+  }
+}

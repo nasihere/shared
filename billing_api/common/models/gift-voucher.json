@@ -1,0 +1,131 @@
+{
+  "name": "GiftVoucher",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mysql": {
+    "schema": "showroom",
+    "table": "gift_voucher"
+  },
+  "properties": {
+    "gvId": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "GV_id",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      },
+      "_selectable": false
+    },
+    "billNo": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "Bill_No",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "giftVoucherType": {
+      "type": "String",
+      "required": false,
+      "length": 255,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "Gift_Voucher_Type",
+        "dataType": "varchar",
+        "dataLength": 255,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "giftVoucherAmount": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "Gift_Voucher_Amount",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "giftVoucherNo": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "Gift_Voucher_No",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "totalAmount": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 22,
+      "scale": null,
+      "mysql": {
+        "columnName": "Total_Amount",
+        "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "giftVoucherExpirydate": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "Gift_Voucher_ExpiryDate",
+        "dataType": "date",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
