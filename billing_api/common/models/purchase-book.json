@@ -253,7 +253,14 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+        "PurchaseBookdet": {
+          "type": "hasMany",
+          "model": "PurchaseBookdet",
+          "foreignKey": "barcodeNo",
+          "primaryKey": "barcodeNo"
+        }
+    },
   "acls": [],
   "methods": {}
 }

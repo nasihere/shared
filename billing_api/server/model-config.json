@@ -46,7 +46,9 @@
   },
   "SalesBook": {
     "dataSource": "mysql_local_fastbill",
-    "public": true
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "SalesBookdet": {
     "dataSource": "mysql_local_fastbill",

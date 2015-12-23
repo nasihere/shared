@@ -10,6 +10,39 @@
     "table": "sales_bookdet"
   },
   "properties": {
+    "id": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "id",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      },
+      "_selectable": false
+    },
+    "idWeb": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "id_web",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      },
+      "_selectable": false
+    },
     "category": {
       "type": "String",
       "required": false,
@@ -42,7 +75,7 @@
       },
       "_selectable": false
     },
-    "billno": {
+    "Bill_No": {
       "type": "Number",
       "required": false,
       "length": null,
@@ -236,7 +269,14 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+      "SalesBook": {
+      "type": "hasOne",
+      "model": "SalesBook",
+      "foreignKey": "Bill_No"
+    }
+
+    },
   "acls": [],
   "methods": {}
 }

@@ -26,39 +26,6 @@
       },
       "_selectable": false
     },
-    "idWeb": {
-      "type": "Number",
-      "id": true,
-      "required": true,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "id_web",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "N"
-      },
-      "_selectable": false
-    },
-    "billNo": {
-      "type": "Number",
-      "required": true,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "Bill_No",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "N"
-      },
-      "_selectable": false
-    },
     "date": {
       "type": "Date",
       "required": false,
@@ -826,10 +793,36 @@
         "nullable": "Y"
       },
       "_selectable": true
+    },
+    "Bill_No": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "index": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "Bill_No",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      },
+      "_selectable": false
     }
+   
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "SalesBookdet": {
+      "type": "hasMany",
+      "model": "SalesBookdet",
+      "foreignKey": "Bill_No",
+      "primaryKey": "Bill_No"
+    }
+  },
   "acls": [],
   "methods": {}
 }
