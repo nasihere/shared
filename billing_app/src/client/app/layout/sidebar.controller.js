@@ -5,9 +5,9 @@
         .module('app.layout')
         .controller('SidebarController', SidebarController);
 
-    SidebarController.$inject = ['$state', 'routerHelper'];
+    SidebarController.$inject = ['$state', 'routerHelper','$mdSidenav'];
     /* @ngInject */
-    function SidebarController($state, routerHelper) {
+    function SidebarController($state, routerHelper,$mdSidenav) {
         var vm = this;
         var states = routerHelper.getStates();
         vm.isCurrent = isCurrent;
@@ -29,7 +29,11 @@
                 return '';
             }
             var menuName = route.title;
-            return $state.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
+            return $state.current.title.substr(0, menuName.length) === menuName ? 'active' : '';
         }
+        function openLeftMenu() {
+            $mdSidenav('left').toggle();
+        };
     }
 })();
+

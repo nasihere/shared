@@ -1,0 +1,119 @@
+    <div id="wrapper">
+        <div class="wrapper wrapper-content">
+        
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Select Option</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal" >
+                                <div class="form-group" ng-repeat = "mo in reports.filterOption" id="#{{mo}}" >
+                                  <label class="col-sm-1 control-label">Options</label>
+                                    <div class="col-sm-2" >
+                                        <select class="form-control m-b" ng-model="mo.fieldName" ng-change="reports.changeSelect(f.DataType)">
+                                            <option value="">Please Select</option>
+                                            <option ng-repeat="f in reports.Filters" value="{{f.key}}" >{{f.value}}<input type="hidden" value="f.DataType" ng-model="mo.DataType"></option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-sm-2" >
+                                        <select class="form-control m-b"  ng-model="mo.operator" >
+                                                <option value="">Please Select</option>
+                                                <option ng-repeat="op in reports.OperatorArray" value="{{op.key}}" > {{op.value}} </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-2" >
+                                        <div class="input-group"><input type="text" placeholder="Enter value" ng-model="mo.value1" class="input-sm form-control"></div>
+
+                                    </div>
+
+                                     <div class="col-sm-2" ng-if="mo.operator == 'BETWEEN'">
+                                        <div class="input-group"><input type="text" placeholder="Start date" class="input-sm form-control" ng-model="mo.value2"></div>
+                                    </div>
+                                    
+                                   <div class="col-sm-1 form-group" ng-if="$index != reports.filterOption.length-1">
+                                        <button type="button" class="btn btn-primary btn-circle btn-sm" ng-click="reports.deletOption()"> <i class="fa fa-minus"></i></button> 
+                                    </div>
+                                    
+                                    <div class="col-sm-1 form-group" ng-if="$index == reports.filterOption.length-1">
+                                        <button type="button" class="btn btn-primary btn-circle btn-sm" ng-click="reports.addOption()"> <i class="fa fa-plus"></i></button> 
+                                    </div>
+                                     <div class="col-sm-2 form-group" ng-if="$index == reports.filterOption.length-1" >
+                                        <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary" ng-click="reports.ShowReport()"> Go!</button> </span>
+                                    </div>
+                                </div>
+                                <pre>{{reports.filterOption | json}}</pre>
+                                <pre>{{reports.currentQuery | json}}</pre>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        <div class="row">
+
+        <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>{{reports.report}} </h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#">Config option 1</a>
+                    </li>
+                    <li><a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+       
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th ng-repeat ="th in reports.thHeading">{{th}} </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in reports.model">
+                       <td ng-repeat="(key,value) in item">{{value}}</td>
+                       
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        </div>
+        </div>
+
+        </div>
+
+
+        </div>
+
+        </div>
+       
+            </div>
+
+
+
+        </div>
+
+<!-- Mainly scripts -->
+
