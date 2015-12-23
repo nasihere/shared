@@ -60,19 +60,19 @@
             }
 			if ($BillNewNo){
 			    echo $BillNewNo;
-					 //echo "-Success-"; // do not echo
+					 echo "-Success-"; // do not echo
 			}
 			else{
-				//	 echo "-Error-" . $InsertUpdateQryPurchaseDet;
+					 echo "-Error-" . $InsertUpdateQryPurchaseDet;
 			}
 
 		    $InsertUpdateQryPurchaseDet = "Insert into Sales_Book (id_web,Date,saved,Bill_No) value (NULL,NOW(),0,'".$BillNewNo."')";
         	$result = mysql_query($InsertUpdateQryPurchaseDet);
 			if ($result == 1){
-			    //echo "-Success-";
+			    echo "-Success-";
 			 }
 			 else{
-				// echo "-Error-" . $InsertUpdateQryPurchaseDet;
+				 echo "-Error-" . $InsertUpdateQryPurchaseDet;
 			 }
 		break;
 
@@ -159,7 +159,7 @@
                 echo $data['id'];
 			}
 			else{
-			    echo "-Error-";
+			    echo "-Error- " . $InsertUpdateQryPurchaseDet . " - " . $qSalesDet_2;
 			}
 		break;
 
@@ -202,6 +202,10 @@
           // echo $_REQUESTss['qry'];
             $result = mysql_query($_REQUEST['qry']);
             $encode = array();
+            if (!$result){
+            	echo 'No data found in query: '.  $_REQUEST['qry'];
+            	return;
+            } 
             while($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
                 $encode[] = $row;
 		        $qSalesDet = "select * from Sales_BookDet where Bill_No =  '" . $row['Bill_No'] . "'";

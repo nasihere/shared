@@ -145,7 +145,7 @@ if ($_REQUEST['action'] == "") $_REQUEST['action']= "read";
 			    echo "-Success-";
 			}
 			else{
-			    echo "-Error-";
+			    echo "-Error- " . $InsertUpdateQryPurchaseDet;
 			}
         break;
 
