@@ -11,7 +11,7 @@
         <md-list>
           <md-list-item ng-repeat="it in vm.navRoutes">
               <md-button ui-sref="{{it.name}}" ng-class="vm.isCurrent(it)">
-                <md-icon class="avatar"></md-icon>
+                <md-icon md-svg-icon="phone" class="avatar"></md-icon>
                 {{it.name}}
               </md-button>
           </md-list-item>

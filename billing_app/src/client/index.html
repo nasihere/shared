@@ -16,16 +16,17 @@
      <base href="/">
 
     <!-- build:css styles/lib.css -->
-    <!-- bower:css --><!-- 
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" /> -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:css styles/app.css -->
     <!-- inject:css -->
-    <!-- <link rel="stylesheet" href="/.tmp/styles.css"> -->
-    <!-- endinject -->
+   <link rel="stylesheet" href="/.tmp/styles.css">
+   <!-- endinject -->
     <!-- endbuild -->
 
      <style type="text/css">
@@ -41,7 +42,8 @@
 
 </head>
 <body ng-cloak layout="row" >
-       
+        
+        <div ng-include="'app/layout/sidebar.html'"></div>
         <div ng-include="'app/layout/shell.html'" flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
 
         <div id="splash-page" ng-show="showSplash">
@@ -59,18 +61,16 @@
     <!-- build:js js/lib.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
-    
-    <script src="./bower_components/angular/angular.js"></script>
-    <script src="./bower_components/angular-animate/angular-animate.js"></script>
-    <script src="./bower_components/angular-aria/angular-aria.js"></script>
-    <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
-
+    <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
     <script src="/bower_components/moment/moment.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/bower_components/toastr/toastr.js"></script>
-    
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -87,6 +87,7 @@
     <script src="/src/client/app/widgets/widgets.module.js"></script>
     <script src="/src/client/app/admin/admin.controller.js"></script>
     <script src="/src/client/app/admin/admin.route.js"></script>
+    <script src="/src/client/app/billing/billing.js"></script>
     <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
     <script src="/src/client/app/blocks/exception/exception.js"></script>
     <script src="/src/client/app/blocks/logger/logger.js"></script>
@@ -101,6 +102,8 @@
     <script src="/src/client/app/layout/ht-top-nav.directive.js"></script>
     <script src="/src/client/app/layout/shell.controller.js"></script>
     <script src="/src/client/app/layout/sidebar.controller.js"></script>
+    <script src="/src/client/app/purchase/purchase.js"></script>
+    <script src="/src/client/app/reports/reports.js"></script>
     <script src="/src/client/app/widgets/ht-img-person.directive.js"></script>
     <script src="/src/client/app/widgets/ht-widget-header.directive.js"></script>
     <!-- endinject -->
