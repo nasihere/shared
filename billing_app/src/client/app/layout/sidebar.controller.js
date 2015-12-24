@@ -17,6 +17,7 @@
         function activate() { getNavRoutes(); }
 
         function getNavRoutes() {
+
             vm.myROutes = states;//.filter(function(r) {
             // vm.navRoutes = states.filter(function(r) {
             //     return r.settings && r.settings.nav;
@@ -25,7 +26,7 @@
             // });
 
             vm.navRoutes = [
-                {"name":"Billing","icon":"phone", "route":"billing"},
+                {"type":"link","name":"Billing","icon":"phone", "route":"billing"},
                 {"name":"Sales Book","icon":"menu","route":"dashboard"},
                 {"name":"Reports","icon":"phone","route":"blocks"}
             ];
@@ -36,7 +37,7 @@
                 return '';
             }
             var menuName = route.title;
-            return $state.current.title.substr(0, menuName.length) === menuName ? 'selected' : '';
+            return $state.current.title.substr(0, menuName.length) === menuName ? 'childActive' : '';
         }
         function openLeftMenu() {
             $mdSidenav('left').toggle();

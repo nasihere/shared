@@ -519,7 +519,7 @@ vm.isDisabled = true;
 						     console.log("----APICALL Details Json Data----");
 						     WebData = response;
                              vm.model =  WebData[0];
-                             vm.model.det =  WebData.det;
+                             //vm.model.det =  WebData.det;
                              vm.model.GiftVouchers =  WebData.GiftVouchers;
 						  console.log(vm.model);
 						  	 vm.DoCalculation();	

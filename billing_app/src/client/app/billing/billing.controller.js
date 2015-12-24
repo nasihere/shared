@@ -29,6 +29,18 @@ angular.module('app.billing', [])
                   return promise;
                 },
 
+          searchBarcode: function(paramter) {
+                    //http://localhost:3002/api/PurchaseBooks
+                    // ?filter[fields][barcodeNo]=true&filter[where][barcodeNo][like]=test%
+
+                 var url = httpApiURL +"api/PurchaseBooks?filter[fields][barcodeNo]=true&filter[where][barcodeNo][like]="+paramter+"%";
+                 var promise = $http.get(url).then(function (response) {
+                   // console.log(response);
+                    return response.data;
+                  });
+                  return promise;
+                },
+
       };
 
       return myService;
@@ -36,9 +48,9 @@ angular.module('app.billing', [])
     });
 
 
-  BillingController.$inject = ['API','$stateParams'];
+  BillingController.$inject = ['API','$stateParams','$q'];
     
-function BillingController(API,$stateParams) {
+function BillingController(API,$stateParams,$q) {
 	// alert(  $stateParams.id);
 	var vm = this;
     vm.isDisabled = true;
@@ -552,10 +564,10 @@ vm.isDisabled = true;
                     // try{
 						     WebData = response;
                              vm.model =  WebData[0];
-                             vm.model.det =  WebData.det;
-                             vm.model.GiftVouchers =  WebData.GiftVouchers;
+                           //  vm.model.det =  WebData.det;
+                            // vm.model.GiftVouchers =  WebData.GiftVouchers;
 						  //	 vm.DoCalculation();	
-                             toastr.success( vm.model.Barcode_No, "Status");
+                             //	toastr.success( vm.model.Barcode_No, "Status");
 
                         // }catch(e){
                         //     console.log(e);
@@ -586,6 +598,18 @@ vm.isDisabled = true;
 	   else {
 		   vm.New();
 	   }
+
+
+	vm.getMatches = function(SearchTerm){
+		 var q = $q.defer();
+		
+		API.searchBarcode(SearchTerm).then(function(response){
+			q.resolve( response );
+
+				
+		}); 	
+		return q.promise;
+	}
    
 };
 

@@ -1,6 +1,104 @@
-<h1> billing is working still.. no javascript error GOOD JOB</h1>
+
+<div layout="row" layout-wrap>
+  <div flex="none">
 
 
-<pre>
-{{vm.model | json}}
-</pre>
+
+
+
+
+  </div>
+  <div flex>
+    
+  </div>
+  <div flex="nogrow">
+    <!-- [flex="nogrow"] -->
+
+<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in vm.getMatches(searchText)" md-item-text="item.display">
+  <md-item-template>
+    <span md-highlight-text="searchText">{{item.barcodeNo}}</span>
+  </md-item-template>
+  <md-not-found>
+    No matches found.
+  </md-not-found>
+</md-autocomplete>
+
+
+
+  </div>
+  <div flex="grow">
+    
+
+<!-- [flex="grow"] -->
+
+			    <div layout="column" layout-fill>
+			  <md-toolbar>
+			    <div class="md-toolbar-tools">
+			      <span>Billing Screen </span>
+			      <!-- fill up the space between left and right area -->
+			      <span flex></span>
+			      <md-menu-bar>
+			  <md-menu>
+			    <button ng-click="$mdOpenMenu()">
+			      Help
+			    </button>
+			    <md-menu-content>
+			      <md-menu-item>
+			        <md-button ng-click="ctrl.sampleAction('share', $event)">
+			          New
+			        </md-button>
+			      </md-menu-item>
+			      <md-menu-divider></md-menu-divider>
+			      <md-menu-item>
+			        <md-button ng-click="ctrl.sampleAction('share', $event)">
+			          Save
+			        </md-button>
+			      </md-menu-item>
+			      <md-menu-divider></md-menu-divider>
+			      <md-menu-item>
+			        <md-button ng-click="ctrl.sampleAction('share', $event)">
+			          Print
+			        </md-button>
+			      </md-menu-item>
+			      <md-menu-divider></md-menu-divider>
+			       <md-menu-item>
+			        <md-button ng-click="ctrl.sampleAction('share', $event)">
+			          Delete
+			        </md-button>
+			      </md-menu-item>
+			      <md-menu-divider></md-menu-divider>
+			      <md-menu-item>
+			        <md-button ng-click="ctrl.sampleAction('share', $event)">
+			          Search
+			        </md-button>
+			      </md-menu-item>
+			     
+			      
+			  </md-menu>
+			</md-menu-bar>
+
+
+    </div>
+  </md-toolbar>
+  <md-content>
+    Hello!
+  </md-content>
+</div>
+
+
+
+
+  </div>
+  <div flex="initial">
+    [flex="initial"]
+  </div>
+  <div flex="auto">
+    [flex="auto"]
+  </div>
+  <div flex="noshrink">
+    [flex="noshrink"]
+  </div>
+  <div flex="0">
+    [flex="0"]
+  </div>
+</div>
