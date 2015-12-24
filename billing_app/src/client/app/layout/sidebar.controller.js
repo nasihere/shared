@@ -17,11 +17,18 @@
         function activate() { getNavRoutes(); }
 
         function getNavRoutes() {
-            vm.navRoutes = states.filter(function(r) {
-                return r.settings && r.settings.nav;
-            }).sort(function(r1, r2) {
-                return r1.settings.nav - r2.settings.nav;
-            });
+            vm.myROutes = states;//.filter(function(r) {
+            // vm.navRoutes = states.filter(function(r) {
+            //     return r.settings && r.settings.nav;
+            // }).sort(function(r1, r2) {
+            //     return r1.settings.nav - r2.settings.nav;
+            // });
+
+            vm.navRoutes = [
+                {"name":"Billing","icon":"phone", "route":"billing"},
+                {"name":"Sales Book","icon":"menu","route":"dashboard"},
+                {"name":"Reports","icon":"phone","route":"blocks"}
+            ];
         }
 
         function isCurrent(route) {

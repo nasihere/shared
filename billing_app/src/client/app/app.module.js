@@ -7,7 +7,8 @@
         'app.widgets',
         'app.admin',
         'app.dashboard',
-        'app.layout'
+        'app.layout',
+        'app.billing'
     ]).config(function($mdThemingProvider, $mdIconProvider){
 
                   $mdIconProvider
@@ -26,3 +27,5 @@
               });;
 
 })();
+
+var httpApiURL = "http://localhost:3002/"

@@ -6,10 +6,31 @@ var Root = {
 
 var ChangeEvent = false;
 
-angular.module('app.billingTemp', [])
-.controller("BillingController", ['API','$compile','$location','$anchorScroll', function (API,$compile,$location,$anchorScroll) {
-	HttpUrl = "Qry/billq.php";
-    var vm = this;
+angular.module('app.billing', [])
+  .controller('BillingController', BillingController)
+  .factory('API', function($http) {
+    var myService = {
+        call: function() {
+                    
+                 var url = httpApiURL +"api/SalesBooks?"+ HttpQry;
+                 var promise = $http.post(url).then(function (response) {
+                    console.log(response);
+                    return response.data;
+                  });
+                  return promise;
+                },
+
+      };
+
+      return myService;
+
+    });
+
+
+  BillingController.$inject = ['API'];
+    
+function BillingController(API) {
+	var vm = this;
     vm.isDisabled = true;
 	vm.running = true;
 	vm.isDeveloperMode = true;
@@ -69,12 +90,12 @@ angular.module('app.billingTemp', [])
 
 	vm.StartCalculation = false;
 	
-	vm.takehim = function(TakeHimTo){
-		setTimeout(function(){
-			$location.hash(TakeHimTo);
-			$anchorScroll();
-		},500);
-	}
+	// vm.takehim = function(TakeHimTo){
+	// 	setTimeout(function(){
+	// 		$location.hash(TakeHimTo);
+	// 		$anchorScroll();
+	// 	},500);
+	// }
 	
 	vm.SearchBar = function(SearchTerm){
 
@@ -556,6 +577,5 @@ vm.isDisabled = true;
 		   vm.New();
 	   }
    
-
-}]);
+};
 
