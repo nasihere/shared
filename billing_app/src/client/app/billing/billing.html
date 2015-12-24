@@ -12,22 +12,21 @@
     
   </div>
   <div flex="nogrow">
-    <!-- [flex="nogrow"] -->
-
-<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in vm.getMatches(searchText)" md-item-text="item.display">
-  <md-item-template>
-    <span md-highlight-text="searchText">{{item.barcodeNo}}</span>
-  </md-item-template>
-  <md-not-found>
-    No matches found.
-  </md-not-found>
-</md-autocomplete>
+		    <!-- [flex="nogrow"] -->
+		<md-autocomplete placeholder="Search" md-selected-item="selectedItem"  md-search-text="vm.searchText" md-items="item in vm.getMatches(vm.searchText)" md-item-text="item.barcodeNo" >
+		  <md-item-template>
+		    <span md-highlight-text="vm.searchText">{{item.barcodeNo}}</span>
+		  </md-item-template>
+		  <md-not-found>
+		    No matches found.
+		  </md-not-found>
+		</md-autocomplete>
 
 
 
   </div>
   <div flex="grow">
-    
+    	{{vm.searchText}}
 
 <!-- [flex="grow"] -->
 

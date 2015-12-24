@@ -48,9 +48,9 @@ angular.module('app.billing', [])
     });
 
 
-  BillingController.$inject = ['API','$stateParams','$q'];
+  BillingController.$inject = ['API','$stateParams','$q','$scope'];
     
-function BillingController(API,$stateParams,$q) {
+function BillingController(API,$stateParams,$q,$scope) {
 	// alert(  $stateParams.id);
 	var vm = this;
     vm.isDisabled = true;
@@ -602,7 +602,6 @@ vm.isDisabled = true;
 
 	vm.getMatches = function(SearchTerm){
 		 var q = $q.defer();
-		
 		API.searchBarcode(SearchTerm).then(function(response){
 			q.resolve( response );
 
@@ -610,6 +609,12 @@ vm.isDisabled = true;
 		}); 	
 		return q.promise;
 	}
-   
+	$scope.$watch(
+	    "vm.searchText",
+	    function handleFooChange( newValue, oldValue ) {
+	        console.log( "vm.fooCount:" +  oldValue  + " - " + newValue );
+	    }
+	);
+
 };
 
