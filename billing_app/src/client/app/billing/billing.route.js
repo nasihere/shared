@@ -17,7 +17,7 @@
             {
                 state: 'billing',
                 config: {
-                    url: '/billing',
+                    url: '/billing/:id',
                     templateUrl: 'app/billing/billing.html',
                      controller: 'BillingController',
                     controllerAs: 'vm',

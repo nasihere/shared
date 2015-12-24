@@ -10,11 +10,20 @@ angular.module('app.billing', [])
   .controller('BillingController', BillingController)
   .factory('API', function($http) {
     var myService = {
-        call: function() {
+        call: function(HttpQry) {
                     
                  var url = httpApiURL +"api/SalesBooks?"+ HttpQry;
-                 var promise = $http.post(url).then(function (response) {
-                    console.log(response);
+                 var promise = $http.get(url).then(function (response) {
+                   // console.log(response);
+                    return response.data;
+                  });
+                  return promise;
+                },
+          post: function(HttpQry, Paramter) {
+                    
+                 var url = httpApiURL +"api/SalesBooks?"+ HttpQry;
+                 var promise = $http.post(url,Paramter).then(function (response) {
+                   // console.log(response);
                     return response.data;
                   });
                   return promise;
@@ -27,9 +36,10 @@ angular.module('app.billing', [])
     });
 
 
-  BillingController.$inject = ['API'];
+  BillingController.$inject = ['API','$stateParams'];
     
-function BillingController(API) {
+function BillingController(API,$stateParams) {
+	// alert(  $stateParams.id);
 	var vm = this;
     vm.isDisabled = true;
 	vm.running = true;
@@ -56,6 +66,9 @@ function BillingController(API) {
 	}
 	*/
 	//vm.id = 1001;
+
+	vm.id = $stateParams.id;
+
 	vm.BillList = {};
 	 
 	vm.Bill_No_Look = window.localStorage.getItem("Bill_No");
@@ -107,7 +120,7 @@ function BillingController(API) {
 	vm.DoCalculation = function(){
 		vm.StartCalculation = true;
 
-		console.log(vm.StartCalculation);
+	//	console.log(vm.StartCalculation);
 
 		var c = vm.model;
 		var totalMRP;
@@ -449,25 +462,24 @@ vm.isDisabled = true;
 	vm.Save = function(){
 		localStorage.setItem('Bill_No', vm.model.Bill_No);
 		if (confirm("Are you sure want to Save Bill No: " + vm.model.Bill_No)){
-		vm.model.saved = 1;
-        $.post(HttpUrl,{qry:vm.model,action:"SaveSales_Book"},function(data){
-         console.log(data);
-          toastr.success( data, "Status");
-         setTimeout(function() { init(); }, 500);
-        })
-    }
+	//		vm.model.saved = 1;
+	         API.post("",vm.model,function(data){
+		         console.log(data);
+	          toastr.success( data, "Status");
+	        })
+	    }
 		
 	}
-	vm.SaveDet = function(){
-		vm.tempModel.Barcode_No = vm.model.Barcode_No;
-		console.log(vm.tempModel);
-        $.post(HttpUrl,{qry:vm.tempModel,action:"XXXXXXX"},function(data){
-         console.log(data);
-          toastr.success( data, "Status");
-		  vm.SearchBarcode(vm.model.Barcode_No);
-         setTimeout(function() { init(); }, 500);
-        })
-	}
+	// vm.SaveDet = function(){
+	// 	vm.tempModel.Barcode_No = vm.model.Barcode_No;
+	// 	console.log(vm.tempModel);
+ //        $.post(HttpUrl,{qry:vm.tempModel,action:"XXXXXXX"},function(data){
+ //         console.log(data);
+ //          toastr.success( data, "Status");
+	// 	  vm.SearchBarcode(vm.model.Barcode_No);
+ //         setTimeout(function() { init(); }, 500);
+ //        })
+	// }
 	vm.Delete = function(No){
 		if (confirm("Are you sure want to delete Bill No: " + vm.model.Bill_No)){
 			$.post(HttpUrl,{qry:vm.model.Bill_No,action:"DeleteSales"},function(data){
@@ -530,27 +542,25 @@ vm.isDisabled = true;
 		
 	}
 	vm.Search  = function(No_Look){
-		console.log(No_Look);
+	//	console.log(No_Look);
 		if (No_Look == undefined) return;
 		localStorage.setItem('Bill_No', No_Look);
-	     HttpQry = "action=SearchBillNo&qry=Bill_No = " + No_Look;
-         API.call().then(function (response) {
+		//api/SalesBooks?filter[include]=SalesBookdet&filter[where][Bill_No]=8804
+	     HttpQry = "filter[include]=SalesBookdet&filter[where][Bill_No] = " + No_Look;
+         API.call(HttpQry).then(function (response) {
 
-                    try{
-						     console.log("----APICALL Details Json Data----");
+                    // try{
 						     WebData = response;
                              vm.model =  WebData[0];
                              vm.model.det =  WebData.det;
                              vm.model.GiftVouchers =  WebData.GiftVouchers;
-						  console.log(vm.model);
-						  	 vm.DoCalculation();	
+						  //	 vm.DoCalculation();	
                              toastr.success( vm.model.Barcode_No, "Status");
 
-                        }catch(e){
-                            console.log(e);
-                            toastr.error("error", "Status");
-                        }
-                     setTimeout(function() { init(); }, 500);
+                        // }catch(e){
+                        //     console.log(e);
+                        //     toastr.error("error", "Status");
+                        // }
                  });
 		
 		
