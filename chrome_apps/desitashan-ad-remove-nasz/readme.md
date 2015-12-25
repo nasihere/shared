@@ -1,4 +1,4 @@
-#Desi Tashan Add Free Chrome APP
+#Desi Tashan  Adv-Free Chrome APP
 
 Description:
 My wife's TV Mania. She like indian serial alot. When we moved to USA she doesn't have access for Indian Masala Serials. 
@@ -18,15 +18,20 @@ Which help user to view any desi tashan video without running any pre ads.
 ,,
 #Step 1
 Install Chrome
+
 Download All desitashan-ad-remove-nasz files
+
 open chrome
+
 goto settings chrome
+
 goto extension tab
+
 enabled is developer mode on
+
 hit button load unpacked extension
 
-that's it
-
+Done!!! 
 
 Now goto desi-tashan.com and open your fav8 video this app will show my pic on right hand side chrome corner.
 
