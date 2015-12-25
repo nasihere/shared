@@ -1,6 +1,10 @@
 #Desi Tashan  Adv-Free Chrome APP
+
 Created By: Nasir Sayed
-Description:
+
+
+#Description:
+
 My wife's TV Mania. She like indian serial alot. When we moved to USA she doesn't have access for Indian Masala Serials. 
 
 Finally, She found a site call desi tashan where all Star Tv, Zee Tv Sab Tv episodes are well organized for view.
