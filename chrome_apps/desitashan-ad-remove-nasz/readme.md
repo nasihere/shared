@@ -41,6 +41,13 @@ Now goto desi-tashan.com and open your fav8 video this app will show my pic on r
 
 Hit on my pic that will view you video running. if you want to open in full screen hit full screen icon.
 
-thanks
+
+Thanks
+
+
 Nasir Sayed
+
+
 Enjoy adv-free desi tashan
+
+Sorry Desi Tashan :(
