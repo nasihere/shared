@@ -18,20 +18,12 @@ void 0===c?d&&"get"in d&&null!==(e=d.get(a,b))?e:(e=n.find.attr(a,b),null==e?voi
 		
 		$("*").each(function(){
 
-			var bgImgStr = $(this).css('backgroundImage'),
-		        regEx = /\"|\'|\)/g,
-		        bgImgName = bgImgStr.split('/').pop().replace(regEx,'');
-
-			    if(bgImgName === 'poster_0000.png'){
-					var url = bgImgStr.replace('poster_0000.png','video-sd.mp4'); 
-					url = url.replace('url(','');
 					url = url.replace(')',''); $("head").remove();
 					videourl = url.replace(/"/g,'');//
 
 					//alert(url);
 					return url;
 					// $("body").html('<video  width="600" height="1024" autoplay controls><source src=' + url + ' ></source></video>'); 
-    			}
 
 		});
 		return videourl;
