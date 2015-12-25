@@ -21,21 +21,11 @@ Which help user to view any desi tashan video without running any pre ads.
 
 ,,
 #Steps
-Install Chrome
-
-Download All desitashan-ad-remove-nasz files
 
 open chrome
 
-goto settings chrome
+Install NaszAdvFree from Chrome Web Store
 
-goto extension tab
-
-enabled is developer mode on
-
-hit button load unpacked extension
-
-Done!!! 
 
 Now goto desi-tashan.com and open your fav8 video this app will show my pic on right hand side chrome corner.
 
