@@ -1,5 +1,5 @@
 #Desi Tashan  Adv-Free Chrome APP
-
+Created By: Nasir Sayed
 Description:
 My wife's TV Mania. She like indian serial alot. When we moved to USA she doesn't have access for Indian Masala Serials. 
 
@@ -16,7 +16,7 @@ Now, I have made chrome APP for desi tashan add free site.
 Which help user to view any desi tashan video without running any pre ads.
 
 ,,
-#Step 1
+#Steps
 Install Chrome
 
 Download All desitashan-ad-remove-nasz files
@@ -39,4 +39,4 @@ Hit on my pic that will view you video running. if you want to open in full scre
 
 thanks
 Nasir Sayed
-Enjoy ad free desi tashan
+Enjoy adv-free desi tashan
