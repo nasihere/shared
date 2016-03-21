@@ -1,68 +1,17 @@
-﻿<!--     
+﻿
 <div ng-controller="SidebarController as vm">
-        <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
-                    md-component-id="left"
-                    md-is-locked-open="$mdMedia('gt-sm')">
-
-        <md-toolbar class="md-whiteframe-z1">
-          <h1>Menu</h1>
-        </md-toolbar>
-
-        <md-list>
-          <md-list-item ng-repeat="it in vm.navRoutes">
-              <md-button ui-sref="{{it.route}}" ng-class="vm.isCurrent(it)">
-                <md-icon md-svg-icon="{{it.icon}}" class="avatar"></md-icon>
-                {{it.name}}
-              </md-button>
-          </md-list-item>
-        </md-list>
-
-      </md-sidenav>
-      
-
-
-    </div> -->
-
-
-<div ng-controller="SidebarController as vm">
- <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
-              md-component-id="left"
-              md-is-locked-open="$mdMedia('gt-sm')">
-
-    <header class="nav-header">
-      <a ng-href="/" class="docs-logo">
-        <img src=".tmp/img/favicon.svg" alt="" />
-        <h1 class="docs-logotype md-heading">Fast Bill</h1>
-      </a>
-    </header>
-
- 
-    <md-content flex role="navigation">
-    <ul class="docs-menu">
-        <li >
-          <h2 class="menu-heading md-subhead">
-            Menu
-          </h2>
-          <menu-link section="section"></menu-link>
-
-          <menu-toggle section="section"></menu-toggle>
-
-           <ul  class="menu-nested-list">
-            <li ng-repeat="it in vm.navRoutes" ng-class="vm.isCurrent(it)">
-              <md-button ui-sref="{{it.route}}" ng-class="vm.isCurrent(it)">
-                {{it.name}}
-              </md-button>
-              
-            </li>
-          </ul>
-
-
-         
-        </li>
-      </ul>
-          </md-content>
-  </md-sidenav>
+    <ht-sidebar when-done-animating="vm.sidebarReady()">
+        <div class="sidebar-filler"></div>
+        <div class="sidebar-dropdown"><a href="#">Menu</a></div>
+        <div class="sidebar-inner">
+            <div class="sidebar-widget"></div>
+            <ul class="navi">
+                <li class="nlightblue fade-selection-animation" ng-class="vm.isCurrent(r)"
+                    ng-repeat="r in vm.navRoutes">
+                    <a ui-sref="{{r.name}}"
+                       ng-bind-html="r.settings.content"></a>
+                </li>
+            </ul>
+        </div>
+    </ht-sidebar>
 </div>
-
-
-

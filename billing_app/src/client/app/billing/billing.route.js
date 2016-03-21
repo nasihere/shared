@@ -17,15 +17,19 @@
             {
                 state: 'billing',
                 config: {
-                    url: '/billing/:id',
+                    url: '/billing',
                     templateUrl: 'app/billing/billing.html',
-                     controller: 'BillingController',
+                    controller: 'BillingController',
                     controllerAs: 'vm',
-                    title: 'Billing',
+                    title: 'billing',
                     settings: {
-                        nav: 2,
-                        content: '<i class="fa fa-lock"></i> Admin'
+                        nav: 3,
+                        content: '<i class="fa fa-cart"></i> FastBill'
                     }
+                   // templateUrl: 'app/billing/billing.html',
+                  //   controller: 'BillingController',
+                   // controllerAs: 'vm',
+                   
                 }
             }
         ];

@@ -31,9 +31,7 @@ function onPageDetailsReceived(pageDetails)  {
     //  vid.src = pageDetails.video;
     //  vid.load();
     //alert(pageDetails.video)
-    document.getElementById('videoplayer').src = pageDetails.video; 
-    document.getElementById('videolink').href=pageDetails.video;
-}
+   }
 
 // Global reference to the status display SPAN
 var statusDisplay = null;

@@ -1,0 +1,79 @@
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        
+         <md-button class="md-icon-button" aria-label="Settings">
+          <ng-md-icon icon="menu"></md-icon>
+        </md-button>
+
+        <md-button aria-label="Go Back">
+          Fast Bill 
+        </md-button>
+        <h2>
+          <span>Microtech Support USA</span>
+        </h2>
+        <span flex></span>
+       <!--  <md-button class="md-raised" aria-label="Learn More">
+          Settings
+        </md-button> -->
+
+
+
+              <!-- [flex="nogrow"] -->
+      <md-autocomplete placeholder="Search" md-selected-item="selectedItem"  md-search-text="vm.searchText" md-items="item in vm.getMatches(vm.searchText)" md-item-text="item.barcodeNo"  style="color:#000000">
+        <md-item-template>
+          <span md-highlight-text="vm.searchText">{{item.barcodeNo}}</span>
+        </md-item-template>
+        <md-not-found>
+          No matches found.
+        </md-not-found>
+      </md-autocomplete>
+
+        <md-menu-bar>
+              <md-menu>
+                <button ng-click="$mdOpenMenu()" class="md-icon-button md-primary md-button md-ink-ripple" aria-label="Favorite">
+                  <ng-md-icon icon="more_vert"></md-icon>
+                </button>
+                <md-menu-content>
+                  <md-menu-item>
+                    <md-button ng-click="ctrl.sampleAction('share', $event)">
+                      New
+                    </md-button>
+                  </md-menu-item>
+                  <md-menu-divider></md-menu-divider>
+                  <md-menu-item>
+                    <md-button ng-click="ctrl.sampleAction('share', $event)">
+                      Save
+                    </md-button>
+                  </md-menu-item>
+                  <md-menu-divider></md-menu-divider>
+                  <md-menu-item>
+                    <md-button ng-click="ctrl.sampleAction('share', $event)">
+                      Print
+                    </md-button>
+                  </md-menu-item>
+                  <md-menu-divider></md-menu-divider>
+                   <md-menu-item>
+                    <md-button ng-click="ctrl.sampleAction('share', $event)">
+                      Delete
+                    </md-button>
+                  </md-menu-item>
+                  <md-menu-divider></md-menu-divider>
+                  <md-menu-item>
+                    <md-button ng-click="ctrl.sampleAction('share', $event)">
+                      Search
+                    </md-button>
+                  </md-menu-item>
+                 </md-menu-content>
+                
+                  
+              </md-menu>
+            </md-menu-bar>
+
+
+
+
+      </div>
+    </md-toolbar>
+
+  

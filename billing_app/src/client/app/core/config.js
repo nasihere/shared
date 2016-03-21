@@ -13,8 +13,8 @@
     }
 
     var config = {
-        appErrorPrefix: '[billingApp Error] ',
-        appTitle: 'billingApp'
+        appErrorPrefix: '[Fast Bill Error] ',
+        appTitle: 'Fast Bill'
     };
 
     core.value('config', config);
