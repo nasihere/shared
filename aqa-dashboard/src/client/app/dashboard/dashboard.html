@@ -1,0 +1,39 @@
+<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                   </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6" ng-repeat="item in vm.data">
+                    <div class="card">
+                <div class="card-image">
+                   
+                    <span class="card-title">{{item.name}}</span>
+                </div>
+                
+                            <div class="card-content">
+                                <p>{{item.name}}</p>
+                            </div>
+                            
+                            <div class="card-action">
+                                <a href="#" 
+                                target="new_blank" 
+                                ng-repeat="(key, subitem) in item.days">{{subitem.test}}</a>
+                            </div>
+                        </div>
+
+
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</section>
