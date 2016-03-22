@@ -22,13 +22,17 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function SubmitButtonComponent() {
                     this.isActive = false;
                 }
-                SubmitButtonComponent.prototype.onClick = function () {
-                    alert("hi");
+                SubmitButtonComponent.prototype.onDivClick = function () {
+                    console.log("handled by div");
+                };
+                SubmitButtonComponent.prototype.onClick = function ($event) {
+                    $event.stopPropagation();
+                    console.log("clicked", $event);
                 };
                 SubmitButtonComponent = __decorate([
                     core_1.Component({
                         selector: 'submitbutton',
-                        template: "\n       <button (click)=\"onClick()\">Click</button>\n       <button on-click=onClick()>Submit</button>\n                "
+                        template: "\n       <button on-click=onClick($event)>Submit</button>\n       <div (click)=onDivClick()>OnDiv Click\n        <button (click)=\"onClick($event)\">Click</button>\n       \n       </div>\n                "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SubmitButtonComponent);

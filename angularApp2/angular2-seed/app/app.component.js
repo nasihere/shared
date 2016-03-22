@@ -33,7 +33,7 @@ System.register(['angular2/core', './courses.component', './buttons.component', 
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "<h1>Hello Angular Welcome Nasir</h1>\n                <submitbutton></submitbutton>\n                <courses></courses>\n                <authors></authors>",
+                        template: "<h1>Hello Angular Welcome Nasir</h1>\n                <input type=\"text\" [value]=\"title\" [(ngModel)]=\"title\"/>\n                Preview: {{title}}\n                <input type=\"button\" value=\"Clear\" (click)=\"title=''\"/>\n                \n                <submitbutton></submitbutton>\n                <courses></courses>\n                <authors></authors>",
                         directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent, buttons_component_1.SubmitButtonComponent]
                     }), 
                     __metadata('design:paramtypes', [])
