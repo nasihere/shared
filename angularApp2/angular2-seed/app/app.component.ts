@@ -2,16 +2,28 @@ import {Component} from 'angular2/core';
 import {CoursesComponent} from './courses.component';
 import {SubmitButtonComponent} from './buttons.component';
 import {AuthorsComponent} from './authors.component';
+import {StarComponent} from './star.component';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteConfig} from 'angular2/router';
+
 @Component({
     selector: 'my-app',
-    template: `<h1>Hello Angular Welcome Nasir</h1>
-                <input type="text" [value]="title" [(ngModel)]="title"/>
-                Preview: {{title}}
-                <input type="button" value="Clear" (click)="title=''"/>
-                
-                <submitbutton></submitbutton>
-                <courses></courses>
-                <authors></authors>`, 
-    directives: [CoursesComponent,AuthorsComponent,SubmitButtonComponent]
+    template: `
+                <header>
+                    <nav>
+                        <a [routerLink]="['Contact']">Contacts</a>
+                        <a [routerLink]="['NewContact']">New Contacts</a>
+                    </nav>
+                </header>
+                <div class="main">
+                    <router-outlet></router-outlet>
+                </div>
+                `, 
+    directives: [CoursesComponent,AuthorsComponent,SubmitButtonComponent,StarComponent,ROUTER_DIRECTIVES]
 })
+
+@RouteConfig([
+    {path: '/contact', name: 'Contact', component: CoursesComponent},   
+    {path: '/newcontact', name: 'NewContact', component: AuthorsComponent}   
+])
 export class AppComponent { }

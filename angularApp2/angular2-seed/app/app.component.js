@@ -1,4 +1,4 @@
-System.register(['angular2/core', './courses.component', './buttons.component', './authors.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './courses.component', './buttons.component', './authors.component', './star.component', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './courses.component', './buttons.component', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, courses_component_1, buttons_component_1, authors_component_1;
+    var core_1, courses_component_1, buttons_component_1, authors_component_1, star_component_1, router_1, router_2;
     var AppComponent;
     return {
         setters:[
@@ -25,6 +25,13 @@ System.register(['angular2/core', './courses.component', './buttons.component', 
             },
             function (authors_component_1_1) {
                 authors_component_1 = authors_component_1_1;
+            },
+            function (star_component_1_1) {
+                star_component_1 = star_component_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+                router_2 = router_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -33,9 +40,13 @@ System.register(['angular2/core', './courses.component', './buttons.component', 
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "<h1>Hello Angular Welcome Nasir</h1>\n                <input type=\"text\" [value]=\"title\" [(ngModel)]=\"title\"/>\n                Preview: {{title}}\n                <input type=\"button\" value=\"Clear\" (click)=\"title=''\"/>\n                \n                <submitbutton></submitbutton>\n                <courses></courses>\n                <authors></authors>",
-                        directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent, buttons_component_1.SubmitButtonComponent]
-                    }), 
+                        template: "\n                <header>\n                    <nav>\n                        <a [routerLink]=\"['Contact']\">Contacts</a>\n                        <a [routerLink]=\"['NewContact']\">New Contacts</a>\n                    </nav>\n                </header>\n                <div class=\"main\">\n                    <router-outlet></router-outlet>\n                </div>\n                ",
+                        directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent, buttons_component_1.SubmitButtonComponent, star_component_1.StarComponent, router_1.ROUTER_DIRECTIVES]
+                    }),
+                    router_2.RouteConfig([
+                        { path: '/contact', name: 'Contact', component: courses_component_1.CoursesComponent },
+                        { path: '/newcontact', name: 'NewContact', component: authors_component_1.AuthorsComponent }
+                    ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
